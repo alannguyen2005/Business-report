@@ -153,8 +153,6 @@
     "Chất lượng data: Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
     "Chất lượng data: năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn",
     "2024 chỉ có 6 kỳ — không so cả năm được — kết quả kỳ mới nhất chưa so được cả năm (cùng kỳ: -1.0%).",
-    "Model sarima, holt_winters không chạy được (statsmodels chưa được cài) — dự báo dùng trend_seasonal thay thế.",
-    "Model prophet không chạy được (prophet chưa được cài) — dự báo dùng trend_seasonal thay thế.",
     "Xu hướng không có ý nghĩa thống kê — đừng ngoại suy dài hạn từ chuỗi số này."
   ],
   "report_file": "data/reports/business_report_2026-09-01.html"

@@ -382,17 +382,26 @@
       "title": "Sai số backtest (MAPE, thấp hơn là tốt hơn)",
       "data": {
         "labels": [
+          "prophet",
+          "sarima",
           "seasonal_naive",
+          "holt_winters",
           "trend_seasonal"
         ],
         "series": [
           {
             "name": "MAPE %",
             "values": [
+              35.67,
+              21.51,
               11.79,
+              6.11,
               5.73
             ],
             "colors": [
+              "#94A3B8",
+              "#94A3B8",
+              "#94A3B8",
               "#94A3B8",
               "#10B981"
             ]

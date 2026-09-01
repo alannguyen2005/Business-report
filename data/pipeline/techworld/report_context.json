@@ -92,7 +92,7 @@
           "tag": "Model Selection",
           "title": "trend_seasonal thắng baseline: MAPE 5.73% so với 11.79%",
           "evidence": "Backtest trên 6 kỳ cuối với cùng một tập train/test cho mọi model.",
-          "supporting_data": "seasonal_naive: 11.79% · trend_seasonal: 5.73%"
+          "supporting_data": "seasonal_naive: 11.79% · trend_seasonal: 5.73% · sarima: 21.51% · holt_winters: 6.11% · prophet: 35.67%"
         },
         {
           "tag": "Forecast",

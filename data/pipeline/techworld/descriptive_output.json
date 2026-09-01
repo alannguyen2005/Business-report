@@ -288,7 +288,7 @@
   "trend": {
     "slope_per_period": -175.83092324805338,
     "r_squared": 0.03870158749680781,
-    "p_value": 0.29743036310320997,
+    "p_value": 0.29743036310321,
     "significant": false,
     "periods": 30,
     "verdict": "đi ngang — biến động không có ý nghĩa thống kê"

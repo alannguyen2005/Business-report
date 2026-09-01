@@ -104,15 +104,26 @@ def load_data() -> tuple[pd.DataFrame, dict]:
                            "issue": f"{col}: {int(df[col].isna().sum())} giá trị không ép được về số",
                            "action": "coi như thiếu"})
 
-    # Trùng khoá giao dịch
+    # Khoá giao dịch lặp lại: phân biệt hai chuyện rất khác nhau —
+    #   (a) dòng trùng hệt nhau      → lỗi data thật, trừ điểm tin cậy
+    #   (b) cùng ID, nội dung khác   → đơn nhiều mặt hàng, data ở mức dòng hàng.
+    #       Đây là cấu trúc bình thường, KHÔNG phải lỗi. Nhưng phải biết để đếm
+    #       số đơn và tính AOV cho đúng, thay vì đếm nhầm dòng hàng thành đơn.
     txn = SCHEMA.get("transaction_id")
     if txn and txn in df.columns:
-        dup_rows = int(df[txn].duplicated(keep=False).sum())
-        if dup_rows:
+        exact_dups = int(df.duplicated(keep=False).sum())
+        dup_id_rows = int(df[txn].duplicated(keep=False).sum())
+        if exact_dups:
             issues.append({"severity": "medium",
-                           "issue": f"{txn}: {dup_rows} dòng thuộc nhóm ID trùng "
-                                    f"({df[txn].nunique()} ID duy nhất / {len(df)} dòng)",
-                           "action": "giữ nguyên — chưa rõ là upsert hay lỗi nhập"})
+                           "issue": f"{exact_dups} dòng trùng hệt nhau trên mọi cột",
+                           "action": "giữ nguyên — cần người xác nhận trước khi xoá"})
+        if dup_id_rows - exact_dups > 0:
+            multi = dup_id_rows - exact_dups
+            issues.append({"severity": "info",
+                           "issue": f"{multi} dòng thuộc các {txn} có nhiều mặt hàng "
+                                    f"({df[txn].nunique()} đơn / {len(df)} dòng hàng)",
+                           "action": "data ở mức dòng hàng — số đơn và AOV tính theo "
+                                     f"{txn} duy nhất"})
 
     # Lọc đơn hợp lệ
     status, valid = SCHEMA.get("status"), SCHEMA.get("status_valid")
@@ -130,6 +141,18 @@ def load_data() -> tuple[pd.DataFrame, dict]:
     df["_year"] = df[date_col].dt.year
     return df, {"issues": issues, "rows_raw": len(raw), "rows_analyzed": len(df),
                 "excluded_rows": len(raw) - len(df)}
+
+
+def order_count(frame: pd.DataFrame) -> int:
+    """Số ĐƠN, không phải số dòng.
+
+    Một đơn nhiều mặt hàng chiếm nhiều dòng. Đếm dòng sẽ thổi phồng số đơn và
+    làm AOV thấp hơn thực tế. Không khai báo `transaction_id` thì đành đếm dòng.
+    """
+    txn = SCHEMA.get("transaction_id")
+    if txn and txn in frame.columns:
+        return int(frame[txn].nunique())
+    return int(len(frame))
 
 
 def grade_confidence(meta: dict, df: pd.DataFrame, periods: int) -> dict:
@@ -168,7 +191,10 @@ def build_descriptive(df: pd.DataFrame) -> dict:
     rev, prof = SCHEMA["revenue"], SCHEMA.get("profit")
     qty, txn = SCHEMA.get("quantity"), SCHEMA.get("transaction_id")
 
-    agg = {"revenue": (rev, "sum"), "orders": (rev, "size")}
+    # `orders` phải đếm ĐƠN, không phải dòng hàng. Data mức dòng hàng (một đơn
+    # nhiều sản phẩm) mà đếm bằng size sẽ thổi phồng số đơn và bóp méo AOV.
+    agg = {"revenue": (rev, "sum"), "line_items": (rev, "size")}
+    agg["orders"] = (txn, "nunique") if (txn and txn in df.columns) else (rev, "size")
     if prof:
         agg["profit"] = (prof, "sum")
     if qty:
@@ -277,8 +303,9 @@ def build_descriptive(df: pd.DataFrame) -> dict:
 
     totals = {
         "revenue": float(df[rev].sum()),
-        "orders": int(len(df)),
-        "aov": float(df[rev].sum() / len(df)),
+        "orders": int(order_count(df)),
+        "line_items": int(len(df)),
+        "aov": float(df[rev].sum() / order_count(df)),
         "period_start": str(df[SCHEMA["date"]].min().date()),
         "period_end": str(df[SCHEMA["date"]].max().date()),
         "periods": int(df["_period"].nunique()),
@@ -289,11 +316,12 @@ def build_descriptive(df: pd.DataFrame) -> dict:
     if txn and txn in df.columns:
         totals["unique_transactions"] = int(df[txn].nunique())
 
-    # AOV đầu kỳ vs cuối kỳ
+    # AOV đầu kỳ vs cuối kỳ — chia cho số đơn, không phải số dòng hàng
     if len(full_years) >= 2:
         first, last = full_years[0], full_years[-1]
-        aov_first = df[df["_year"] == first][rev].mean()
-        aov_last = df[df["_year"] == last][rev].mean()
+        df_first, df_last = df[df["_year"] == first], df[df["_year"] == last]
+        aov_first = df_first[rev].sum() / order_count(df_first)
+        aov_last = df_last[rev].sum() / order_count(df_last)
         totals["aov_first_year"] = float(aov_first)
         totals["aov_last_year"] = float(aov_last)
         totals["aov_change_pct"] = float((aov_last / aov_first - 1) * 100)
@@ -355,8 +383,8 @@ def build_diagnostic(df: pd.DataFrame, desc: dict) -> dict:
         }
 
     # Tách biến động thành hiệu ứng sản lượng vs giá trị đơn
-    orders_prev = int((df["_year"] == prev).sum())
-    orders_curr = int((df["_year"] == curr).sum())
+    orders_prev = order_count(df[df["_year"] == prev])
+    orders_curr = order_count(df[df["_year"] == curr])
     aov_prev = yoy["revenue_prev"] / orders_prev
     aov_curr = yoy["revenue_curr"] / orders_curr
     volume_effect = (orders_curr - orders_prev) * aov_prev

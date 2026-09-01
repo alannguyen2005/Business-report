@@ -23,18 +23,21 @@
       },
       {
         "model": "sarima",
-        "mape": 21.51,
-        "available": true
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: statsmodels chưa được cài"
       },
       {
         "model": "holt_winters",
-        "mape": 6.11,
-        "available": true
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: statsmodels chưa được cài"
       },
       {
         "model": "prophet",
-        "mape": 35.67,
-        "available": true
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: prophet chưa được cài"
       }
     ]
   },
@@ -199,6 +202,14 @@
     }
   ],
   "total_forecast": 363355.04207652685,
-  "unavailable_models": [],
-  "unavailable_detail": {}
+  "unavailable_models": [
+    "sarima",
+    "holt_winters",
+    "prophet"
+  ],
+  "unavailable_detail": {
+    "sarima": "RuntimeError: statsmodels chưa được cài",
+    "holt_winters": "RuntimeError: statsmodels chưa được cài",
+    "prophet": "RuntimeError: prophet chưa được cài"
+  }
 }

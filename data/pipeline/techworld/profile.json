@@ -12,9 +12,9 @@
       "action": "đã chuẩn hoá về dấu chấm"
     },
     {
-      "severity": "medium",
-      "issue": "Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
-      "action": "giữ nguyên — chưa rõ là upsert hay lỗi nhập"
+      "severity": "info",
+      "issue": "269 dòng thuộc các Order_ID có nhiều mặt hàng (2864 đơn / 3000 dòng hàng)",
+      "action": "data ở mức dòng hàng — số đơn và AOV tính theo Order_ID duy nhất"
     },
     {
       "severity": "info",
@@ -27,11 +27,10 @@
   "excluded_rows": 101,
   "confidence": {
     "grade": "C",
-    "score": 68,
+    "score": 76,
     "reasons": [
       "Net_Profit: 54 dòng dùng dấu phẩy làm thập phân",
       "Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân",
-      "Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
       "năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn"
     ]
   }

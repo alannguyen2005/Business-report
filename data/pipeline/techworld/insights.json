@@ -4,7 +4,7 @@
     "start": "2022-01-01",
     "end": "2024-06-29"
   },
-  "headline": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu.",
+  "headline": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.1% — vấn đề nằm ở giá trị mỗi đơn (-4.2%), không phải ở nhu cầu.",
   "confidence": {
     "grade": "C",
     "note": "Net_Profit: 54 dòng dùng dấu phẩy làm thập phân; Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân"
@@ -24,8 +24,8 @@
     },
     {
       "label": "Giá trị đơn (AOV)",
-      "value": "$632",
-      "delta": "-4.6% so với đầu kỳ",
+      "value": "$661",
+      "delta": "-4.2% so với đầu kỳ",
       "direction": "down"
     },
     {
@@ -37,9 +37,9 @@
   ],
   "findings": [
     {
-      "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$35K so với sản lượng $4K",
-      "detail": "Số đơn tăng từ 1,162 lên 1,168 nhưng AOV rơi từ $655 xuống $625. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
-      "evidence": "Phân tách biến động -$31K: hiệu ứng sản lượng $4K, hiệu ứng giá -$35K."
+      "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$32K so với sản lượng $685",
+      "detail": "Số đơn tăng từ 1,110 lên 1,111 nhưng AOV rơi từ $685 xuống $657. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
+      "evidence": "Phân tách biến động -$31K: hiệu ứng sản lượng $685, hiệu ứng giá -$32K."
     },
     {
       "title": "Xu hướng 30 kỳ: đi ngang — biến động không có ý nghĩa thống kê",
@@ -108,8 +108,8 @@
   "strategy": [
     {
       "action": "Dựng lại giá trị đơn: bán kèm và nâng cấp cấu hình tại bước thanh toán",
-      "rationale": "AOV rơi $30/đơn trong khi số đơn vẫn tăng — lưu lượng khách không phải vấn đề, giỏ hàng mới là vấn đề.",
-      "impact": "Lấy lại được AOV cũ tương đương $35K/năm",
+      "rationale": "AOV rơi $29/đơn trong khi số đơn vẫn tăng — lưu lượng khách không phải vấn đề, giỏ hàng mới là vấn đề.",
+      "impact": "Lấy lại được AOV cũ tương đương $32K/năm",
       "effort": "Trung bình",
       "owner_hint": "Thương mại điện tử",
       "priority": 1
@@ -150,9 +150,11 @@
   "risks": [
     "Chất lượng data: Net_Profit: 54 dòng dùng dấu phẩy làm thập phân",
     "Chất lượng data: Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân",
-    "Chất lượng data: Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
     "Chất lượng data: năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn",
     "2024 chỉ có 6 kỳ — không so cả năm được — kết quả kỳ mới nhất chưa so được cả năm (cùng kỳ: -1.0%).",
+    "Model sarima, holt_winters không chạy được (statsmodels chưa được cài) — dự báo dùng trend_seasonal thay thế.",
+    "Model prophet không chạy được (prophet chưa được cài) — dự báo dùng trend_seasonal thay thế.",
+    "Chỉ có 24 kỳ để huấn luyện (2.0 chu kỳ mùa vụ). Các model mùa vụ cần tối thiểu 3 chu kỳ mới ước lượng ổn định — dự báo nên đọc như một khoảng, không phải con số chính xác.",
     "Xu hướng không có ý nghĩa thống kê — đừng ngoại suy dài hạn từ chuỗi số này."
   ],
   "report_file": "data/reports/business_report_2026-09-01.html"

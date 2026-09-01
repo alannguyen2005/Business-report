@@ -1,6 +1,6 @@
 {
   "report_type": "business",
-  "big_answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu.",
+  "big_answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.1% — vấn đề nằm ở giá trị mỗi đơn (-4.2%), không phải ở nhu cầu.",
   "verdict_sentence": "$1.83M doanh thu · biên 33.1% · YoY -4.1% · dự báo $363K",
   "header_kpis": [
     {
@@ -17,22 +17,22 @@
     },
     {
       "label": "Giá trị đơn (AOV)",
-      "value": "$632",
-      "delta": "-4.6% so với đầu kỳ",
+      "value": "$661",
+      "delta": "-4.2% so với đầu kỳ",
       "status": "alert"
     }
   ],
   "scqa": {
-    "situation": "TechWorld — nhà bán lẻ thương mại điện tử ngành điện tử tiêu dùng. 4 nhóm hàng (Electronics, Audio, Accessories, Wearables), bán trên 4 vùng (North/South/East/West) qua 6 kênh traffic. Kỳ phân tích 2022-01-01 → 2024-06-29: $1.83M doanh thu từ 2,899 đơn hợp lệ, biên lợi nhuận 33.1%.",
-    "complication": "Doanh thu 2023 giảm $31K (-4.1%) so với 2022, trong khi số đơn lại tăng +0.5% và biên lợi nhuận giữ nguyên. Chi phí và nhu cầu đều không phải nguyên nhân.",
+    "situation": "TechWorld — nhà bán lẻ thương mại điện tử ngành điện tử tiêu dùng. 4 nhóm hàng (Electronics, Audio, Accessories, Wearables), bán trên 4 vùng (North/South/East/West) qua 6 kênh traffic. Kỳ phân tích 2022-01-01 → 2024-06-29: $1.83M doanh thu từ 2,772 đơn hợp lệ, biên lợi nhuận 33.1%.",
+    "complication": "Doanh thu 2023 giảm $31K (-4.1%) so với 2022, trong khi số đơn lại tăng +0.1% và biên lợi nhuận giữ nguyên. Chi phí và nhu cầu đều không phải nguyên nhân.",
     "question": "Điều gì đang bào mòn giá trị mỗi đơn, nhóm nào còn tăng trưởng, và nên dồn nguồn lực vào đâu trong 2 quý tới?",
-    "answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu. 6 kỳ tới dự báo tổng $363K bằng model trend_seasonal (MAPE 5.73% so với baseline 11.79%)."
+    "answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.1% — vấn đề nằm ở giá trị mỗi đơn (-4.2%), không phải ở nhu cầu. 6 kỳ tới dự báo tổng $363K bằng model trend_seasonal (MAPE 5.73% so với baseline 11.79%)."
   },
   "sections": [
     {
       "id": "descriptive",
       "title": "Kết quả kinh doanh: $1.83M, biên 33.1%, xu hướng đi ngang — biến động không có ý nghĩa thống kê",
-      "bridge_in": "2022-01-01 → 2024-06-29 · 2,899 đơn hợp lệ · 30 kỳ",
+      "bridge_in": "2022-01-01 → 2024-06-29 · 2,772 đơn hợp lệ · 30 kỳ",
       "bridge_out": "Biên lợi nhuận không đổi đã loại chi phí khỏi danh sách nghi vấn — nguyên nhân nằm ở cấu trúc doanh thu.",
       "findings": [
         {
@@ -60,9 +60,9 @@
       "findings": [
         {
           "tag": "Root Cause",
-          "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$35K so với sản lượng $4K",
-          "evidence": "Số đơn tăng từ 1,162 lên 1,168 nhưng AOV rơi từ $655 xuống $625. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
-          "supporting_data": "Phân tách biến động -$31K: hiệu ứng sản lượng $4K, hiệu ứng giá -$35K."
+          "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$32K so với sản lượng $685",
+          "evidence": "Số đơn tăng từ 1,110 lên 1,111 nhưng AOV rơi từ $685 xuống $657. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
+          "supporting_data": "Phân tách biến động -$31K: hiệu ứng sản lượng $685, hiệu ứng giá -$32K."
         },
         {
           "tag": "Contrast",
@@ -92,7 +92,7 @@
           "tag": "Model Selection",
           "title": "trend_seasonal thắng baseline: MAPE 5.73% so với 11.79%",
           "evidence": "Backtest trên 6 kỳ cuối với cùng một tập train/test cho mọi model.",
-          "supporting_data": "seasonal_naive: 11.79% · trend_seasonal: 5.73% · sarima: 21.51% · holt_winters: 6.11% · prophet: 35.67%"
+          "supporting_data": "seasonal_naive: 11.79% · trend_seasonal: 5.73%"
         },
         {
           "tag": "Forecast",
@@ -109,7 +109,7 @@
   ],
   "confidence": {
     "grade": "C",
-    "score": 68,
-    "interpretation": "Grade C (68/100). Các vấn đề đã ghi nhận: Net_Profit: 54 dòng dùng dấu phẩy làm thập phân; Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân; Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng); năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn. Mọi con số trong báo cáo tính từ file data gốc, không nhập tay."
+    "score": 76,
+    "interpretation": "Grade C (76/100). Các vấn đề đã ghi nhận: Net_Profit: 54 dòng dùng dấu phẩy làm thập phân; Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân; năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn. Mọi con số trong báo cáo tính từ file data gốc, không nhập tay."
   }
 }

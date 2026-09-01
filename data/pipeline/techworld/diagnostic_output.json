@@ -230,13 +230,13 @@
   },
   "decomposition": {
     "total_change": -31290.0,
-    "volume_effect": 3928.1411359724616,
-    "price_effect": -35218.1411359725,
-    "volume_share_pct": 10.034519009197586,
-    "orders_prev": 1162,
-    "orders_curr": 1168,
-    "aov_prev": 654.6901893287436,
-    "aov_curr": 624.5376712328767,
+    "volume_effect": 685.3603603603603,
+    "price_effect": -31975.36036036029,
+    "volume_share_pct": 2.098423871967875,
+    "orders_prev": 1110,
+    "orders_curr": 1111,
+    "aov_prev": 685.3603603603603,
+    "aov_curr": 656.5796579657966,
     "driver": "giá trị đơn"
   },
   "concentration": {

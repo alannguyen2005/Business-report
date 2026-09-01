@@ -236,8 +236,8 @@ def build_headline(f: dict) -> str:
 def build_kpis(f: dict) -> list[dict]:
     totals, yoy, pred = f["totals"], f["yoy"], f["pred"]
     kpis = [{"label": "Doanh thu", "value": money(totals["revenue"]),
-             "delta": (f"{pct(yoy['revenue_change_pct'])} YoY" if yoy else
-                       f"{totals['periods']} kỳ"),
+             "delta": (f"{pct(yoy['revenue_change_pct'])} so với {yoy['prev_year']}"
+                       if yoy else f"{totals['periods']} kỳ"),
              "direction": ("down" if yoy and yoy["revenue_change_pct"] < 0
                            else "up" if yoy else "flat")}]
     if "margin" in totals:
@@ -245,20 +245,22 @@ def build_kpis(f: dict) -> list[dict]:
         direction = "flat"
         if yoy and "margin_curr" in yoy:
             change_pp = (yoy["margin_curr"] - yoy["margin_prev"]) * 100
-            margin_delta = (f"{change_pp:+.1f}pp YoY" if abs(change_pp) >= 0.1
-                            else "không đổi")
+            margin_delta = (f"{change_pp:+.1f} điểm so với {yoy['prev_year']}"
+                            if abs(change_pp) >= 0.1 else "không đổi")
             direction = ("flat" if abs(change_pp) < 0.1
                          else "up" if change_pp > 0 else "down")
         kpis.append({"label": "Biên lợi nhuận", "value": f"{totals['margin']*100:.1f}%",
                      "delta": margin_delta, "direction": direction})
     if "aov_change_pct" in totals:
-        kpis.append({"label": "Giá trị đơn (AOV)", "value": money(totals["aov"]),
+        kpis.append({"label": "Giá trị mỗi đơn", "value": money(totals["aov"]),
                      "delta": f"{pct(totals['aov_change_pct'])} so với đầu kỳ",
                      "direction": "down" if totals["aov_change_pct"] < 0 else "up"})
     if pred.get("enabled"):
-        kpis.append({"label": f"Dự báo {pred['horizon']} kỳ",
+        # Nhãn nói bằng ngôn ngữ kinh doanh — MAPE và tên model thuộc về report,
+        # không thuộc về email gửi lãnh đạo.
+        kpis.append({"label": f"Dự báo {pred['horizon']} tháng tới",
                      "value": money(pred["total_forecast"]),
-                     "delta": f"MAPE {pred['chosen_mape']}%", "direction": "flat"})
+                     "delta": "ước tính", "direction": "flat"})
     return kpis
 
 
@@ -339,6 +341,81 @@ def build_findings(f: dict) -> list[dict]:
     return findings
 
 
+def build_executive(f: dict) -> dict:
+    """Bản dành cho lãnh đạo — không thuật ngữ, không thống kê, không tên model.
+
+    Cùng nguồn số với phần kỹ thuật, chỉ khác cách kể: nói chuyện kinh doanh
+    (bán được bao nhiêu, giỏ hàng to hay nhỏ, nhóm nào lên xuống), bỏ hết
+    p-value, MAPE, hiệu ứng giá/sản lượng, điểm tin cậy.
+    """
+    yoy, decomp, totals = f["yoy"], f["decomp"], f["totals"]
+    season, pred = f["season"], f["pred"]
+    summary: list[str] = []
+
+    # 1. Kết quả gọn trong một câu
+    if yoy:
+        direction = "giảm" if yoy["revenue_change_pct"] < 0 else "tăng"
+        line = (f"Doanh thu {yoy['curr_year']} đạt {money(yoy['revenue_curr'])}, "
+                f"{direction} {abs(yoy['revenue_change_pct']):.1f}% so với {yoy['prev_year']}.")
+        if "margin_curr" in yoy:
+            change_pp = abs(yoy["margin_curr"] - yoy["margin_prev"]) * 100
+            line += (f" Tỷ lệ lợi nhuận giữ nguyên ở {yoy['margin_curr']*100:.0f}%."
+                     if change_pp < 0.5 else
+                     f" Tỷ lệ lợi nhuận {yoy['margin_curr']*100:.0f}%.")
+        summary.append(line)
+
+    # 2. Khách mua ít đi hay giỏ hàng nhỏ đi — câu hỏi lãnh đạo nào cũng hỏi
+    if decomp:
+        gap = decomp["aov_prev"] - decomp["aov_curr"]
+        order_change = decomp["orders_curr"] - decomp["orders_prev"]
+        if decomp.get("driver") == "giá trị đơn":
+            summary.append(
+                f"Lượng khách mua không giảm — số đơn gần như không đổi "
+                f"({decomp['orders_prev']:,} lên {decomp['orders_curr']:,} đơn). "
+                f"Vấn đề là mỗi đơn nhỏ đi {money(abs(gap))}, từ "
+                f"{money(decomp['aov_prev'])} xuống {money(decomp['aov_curr'])}.")
+        else:
+            summary.append(
+                f"Số đơn thay đổi {order_change:+,} đơn, trong khi giá trị mỗi đơn "
+                f"ở mức {money(decomp['aov_curr'])}.")
+
+    # 3. Nhóm hàng nào kéo lên, nhóm nào kéo xuống
+    if f["declining_cats"] and f["growing_cats"]:
+        d, growing = f["declining_cats"][0], f["growing_cats"]
+        names = ", ".join(f"{c['name']} {pct(c['yoy_pct'], 0)}" for c in growing[:3])
+        summary.append(
+            f"{d['name']} chiếm {d['share_pct']:.0f}% doanh thu và giảm "
+            f"{abs(d['yoy_pct']):.0f}%, đủ để kéo cả công ty đi xuống. "
+            f"Các nhóm còn lại đều tăng ({names}) nhưng còn quá nhỏ để bù lại.")
+
+    # 4. Vùng nào đang làm tốt
+    if f["growing_regions"]:
+        r = f["growing_regions"][0]
+        summary.append(f"Vùng {r['name']} là nơi duy nhất tăng trưởng "
+                       f"({pct(r['yoy_pct'], 0)}) trong khi các vùng khác đều giảm.")
+
+    # 5. Nhịp mùa vụ — dùng để lên kế hoạch
+    if season:
+        summary.append(
+            f"{MONTH_VI[season['peak_month']]} luôn là tháng cao điểm, "
+            f"{MONTH_VI[season['trough_month']]} thấp nhất năm — chênh nhau "
+            f"khoảng {season['swing_pp']:.0f}% doanh thu. Nên chốt tồn kho và "
+            f"ngân sách quảng cáo theo nhịp này.")
+
+    # Dự báo nói bằng khoảng, không nói tên model cũng không nói sai số
+    outlook = ""
+    if pred.get("enabled") and pred.get("points"):
+        lo = sum(p["lo"] for p in pred["points"])
+        hi = sum(p["hi"] for p in pred["points"])
+        peak = max(pred["points"], key=lambda p: p["value"])
+        peak_month = int(peak["period"][-2:])
+        outlook = (f"{pred['horizon']} tháng tới ước đạt {money(lo)} – {money(hi)}, "
+                   f"với cao điểm rơi vào {MONTH_VI.get(peak_month, peak['period'])} "
+                   f"khoảng {money(peak['value'])}.")
+
+    return {"summary": summary, "outlook": outlook}
+
+
 def build_strategy(f: dict) -> list[dict]:
     actions, decomp = [], f["decomp"]
     max_actions = CONFIG["strategy"].get("max_actions", 5)
@@ -348,9 +425,9 @@ def build_strategy(f: dict) -> list[dict]:
         recover = gap * decomp["orders_curr"]
         actions.append({
             "action": "Dựng lại giá trị đơn: bán kèm và nâng cấp cấu hình tại bước thanh toán",
-            "rationale": (f"AOV rơi {money(gap)}/đơn trong khi số đơn vẫn tăng — "
-                          f"lưu lượng khách không phải vấn đề, giỏ hàng mới là vấn đề."),
-            "impact": f"Lấy lại được AOV cũ tương đương {money(recover)}/năm",
+            "rationale": (f"Mỗi đơn nhỏ đi {money(gap)} trong khi số khách mua không "
+                          f"giảm — vấn đề nằm ở giỏ hàng, không phải ở lượng khách."),
+            "impact": f"Đưa giá trị đơn về mức cũ tương đương {money(recover)}/năm",
             "effort": "Trung bình", "owner_hint": "Thương mại điện tử", "priority": 1,
         })
 
@@ -395,8 +472,8 @@ def build_strategy(f: dict) -> list[dict]:
         actions.append({
             "action": (f"Chốt tồn kho và ngân sách quảng cáo cho "
                        f"{MONTH_VI[season['peak_month']]} trước ít nhất 6 tuần"),
-            "rationale": (f"{MONTH_VI[season['peak_month']]} luôn là đỉnh "
-                          f"(chỉ số {season['peak_index']:.0f}); dự báo kỳ này "
+            "rationale": (f"{MONTH_VI[season['peak_month']]} năm nào cũng cao hơn "
+                          f"trung bình {season['peak_index']-100:.0f}%; dự báo kỳ này "
                           f"{money(peak_point['value'])}."),
             "impact": f"Tránh hụt hàng ở kỳ cao điểm ≈ {money(peak_point['value'])}",
             "effort": "Thấp", "owner_hint": "Chuỗi cung ứng", "priority": 5,
@@ -465,6 +542,7 @@ def main() -> int:
     findings = build_findings(f)
     strategy = build_strategy(f)
     risks = build_risks(f, profile)
+    executive = build_executive(f)          # bản không thuật ngữ, dùng cho email
 
     # chart_specs.json
     charts = build_charts(desc, diag, pred)
@@ -598,6 +676,9 @@ def main() -> int:
         "confidence": {"grade": conf["grade"],
                        "note": "; ".join(conf["reasons"][:2]) if conf["reasons"] else ""},
         "kpis": kpis,
+        # `executive` → email (ngôn ngữ kinh doanh)
+        # `findings` + `risks` → report HTML (có bằng chứng thống kê)
+        "executive": executive,
         "findings": [{"title": x["title"], "detail": x["detail"],
                       "evidence": x["evidence"]}
                      for x in findings[:CONFIG["analysis"].get("top_n_findings", 5)]],

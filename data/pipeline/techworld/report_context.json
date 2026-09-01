@@ -6,7 +6,7 @@
     {
       "label": "Doanh thu",
       "value": "$1.83M",
-      "delta": "-4.1% YoY",
+      "delta": "-4.1% so với 2022",
       "status": "alert"
     },
     {
@@ -16,7 +16,7 @@
       "status": "flat"
     },
     {
-      "label": "Giá trị đơn (AOV)",
+      "label": "Giá trị mỗi đơn",
       "value": "$661",
       "delta": "-4.2% so với đầu kỳ",
       "status": "alert"

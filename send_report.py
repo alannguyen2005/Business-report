@@ -134,19 +134,6 @@ def bullet_section(title, items, renderer):
             "<div>{body}</div>".format(ink=INK, title=esc(title), body=body))
 
 
-def render_finding(f, idx):
-    evidence = ""
-    if f.get("evidence"):
-        evidence = ("<div style=\"color:{};font-size:12px;margin-top:3px\">{}</div>"
-                    .format(MUTED, esc(f["evidence"])))
-    return ("<div style=\"margin:0 0 12px;padding-left:12px;border-left:3px solid {line}\">"
-            "<div style=\"color:{ink};font-size:14px;font-weight:600\">{idx}. {title}</div>"
-            "<div style=\"color:{ink};font-size:13px;margin-top:3px\">{detail}</div>"
-            "{evidence}</div>".format(
-                line=LINE, ink=INK, idx=idx, evidence=evidence,
-                title=esc(f.get("title", "")), detail=esc(f.get("detail", ""))))
-
-
 def render_action(a, idx):
     meta = " · ".join(
         "{}: {}".format(label, esc(a[key]))
@@ -170,68 +157,65 @@ def render_action(a, idx):
 
 
 def build_body(insights, report):
+    """Email dành cho lãnh đạo: kết quả kinh doanh, dự báo, hành động đề xuất.
+
+    Cố tình KHÔNG đưa vào: bằng chứng thống kê, tên model dự báo, sai số,
+    điểm tin cậy, cảnh báo chất lượng dữ liệu. Toàn bộ những thứ đó nằm trong
+    file report đính kèm, dành cho người muốn kiểm chứng.
+    """
     period = insights.get("data_period") or {}
     period_txt = ""
     if period:
-        period_txt = "Dữ liệu {} → {}".format(period.get("start", "?"), period.get("end", "?"))
-
-    conf = insights.get("confidence") or {}
-    conf_txt = ""
-    if conf.get("grade"):
-        conf_txt = " · Độ tin cậy: <b>{}</b>".format(esc(conf["grade"]))
-        if conf.get("note"):
-            conf_txt += " ({})".format(esc(conf["note"]))
+        period_txt = "Số liệu đến {}".format(period.get("end", "?"))
 
     parts = [
         "<div style=\"font-family:-apple-system,Segoe UI,Arial,sans-serif;"
-        "max-width:680px;color:{}\">".format(INK),
-        "<h2 style=\"margin:0 0 4px;font-size:19px\">Business Review — {}</h2>".format(
+        "max-width:660px;color:{};line-height:1.55\">".format(INK),
+        "<h2 style=\"margin:0 0 4px;font-size:20px\">Báo cáo kinh doanh — {}</h2>".format(
             esc(insights.get("generated_at", ""))),
-        "<div style=\"color:{};font-size:12px\">{}{}</div>".format(
-            MUTED, esc(period_txt), conf_txt),
+        "<div style=\"color:{};font-size:12px\">{}</div>".format(MUTED, esc(period_txt)),
     ]
 
     if insights.get("headline"):
         parts.append(
-            "<p style=\"font-size:15px;line-height:1.5;margin:16px 0;padding:12px 16px;"
-            "background:#f7f8fa;border-radius:6px\">{}</p>".format(esc(insights["headline"]))
+            "<p style=\"font-size:16px;line-height:1.5;margin:18px 0;padding:14px 18px;"
+            "background:#f7f8fa;border-left:3px solid {};border-radius:4px\">{}</p>".format(
+                ACCENT, esc(insights["headline"]))
         )
 
     parts.append(kpi_row(insights.get("kpis") or []))
-    parts.append(bullet_section("Phát hiện chính", insights.get("findings") or [], render_finding))
 
-    forecast = insights.get("forecast") or {}
-    if forecast.get("summary"):
+    executive = insights.get("executive") or {}
+
+    # Tình hình kinh doanh — câu văn xuôi, không phải finding kỹ thuật
+    summary = executive.get("summary") or []
+    if summary:
+        items = "".join(
+            "<li style=\"margin-bottom:10px\">{}</li>".format(esc(s)) for s in summary)
         parts.append(
-            "<h3 style=\"color:{ink};font-size:15px;margin:24px 0 8px\">Dự báo {horizon}</h3>"
-            "<div style=\"font-size:13px;line-height:1.5\">{summary}</div>".format(
-                ink=INK, horizon=esc(forecast.get("horizon", "")),
-                summary=esc(forecast["summary"]))
-        )
-        if forecast.get("model"):
-            parts.append("<div style=\"color:{};font-size:12px;margin-top:3px\">"
-                         "Model: {}</div>".format(MUTED, esc(forecast["model"])))
+            "<h3 style=\"color:{ink};font-size:16px;margin:26px 0 10px\">Tình hình kinh doanh</h3>"
+            "<ul style=\"font-size:14px;margin:0;padding-left:20px\">{items}</ul>".format(
+                ink=INK, items=items))
 
-    parts.append(bullet_section("Khuyến nghị hành động",
+    # Dự báo — nói bằng khoảng, không nêu model
+    outlook = executive.get("outlook")
+    if outlook:
+        parts.append(
+            "<h3 style=\"color:{ink};font-size:16px;margin:26px 0 10px\">Dự báo</h3>"
+            "<p style=\"font-size:14px;margin:0\">{outlook}</p>".format(
+                ink=INK, outlook=esc(outlook)))
+
+    parts.append(bullet_section("Hành động đề xuất",
                                 insights.get("strategy") or [], render_action))
-
-    risks = insights.get("risks") or []
-    if risks:
-        items = "".join("<li style=\"margin-bottom:4px\">{}</li>".format(esc(r)) for r in risks)
-        parts.append(
-            "<h3 style=\"color:{ink};font-size:15px;margin:24px 0 8px\">Rủi ro cần theo dõi</h3>"
-            "<ul style=\"font-size:13px;line-height:1.5;margin:0;padding-left:20px\">{items}</ul>"
-            .format(ink=INK, items=items)
-        )
 
     if report:
         parts.append(
-            "<p style=\"color:{muted};font-size:12px;margin-top:24px;padding-top:12px;"
-            "border-top:1px solid {line}\">Report đầy đủ đính kèm: <b>{name}</b> — "
-            "mở bằng trình duyệt.</p>".format(muted=MUTED, line=LINE, name=esc(report.name))
-        )
+            "<p style=\"color:{muted};font-size:13px;margin-top:28px;padding-top:14px;"
+            "border-top:1px solid {line}\">Chi tiết phân tích, biểu đồ và các lưu ý về "
+            "dữ liệu nằm trong file đính kèm <b>{name}</b> — mở bằng trình duyệt."
+            "</p>".format(muted=MUTED, line=LINE, name=esc(report.name)))
 
-    parts.append("<p style=\"color:{};font-size:11px\">Tự động tạo bởi "
+    parts.append("<p style=\"color:{};font-size:11px\">Báo cáo tự động — "
                  "Business Performance Pipeline</p></div>".format(MUTED))
     return "\n".join(p for p in parts if p)
 

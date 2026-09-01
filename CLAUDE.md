@@ -173,8 +173,12 @@ trường là mục tương ứng biến mất khỏi email.
   "headline": "Một câu: tình hình cốt lõi + hàm ý.",
   "confidence": { "grade": "C", "note": "lý do ngắn nếu grade là C/D" },
   "kpis": [
-    { "label": "Doanh thu", "value": "$1.82M", "delta": "-4.1% YoY", "direction": "down" }
+    { "label": "Doanh thu", "value": "$1.83M", "delta": "-4.1% so với 2022", "direction": "down" }
   ],
+  "executive": {
+    "summary": ["Câu văn xuôi cho lãnh đạo — không thuật ngữ, không thống kê."],
+    "outlook": "Dự báo nói bằng khoảng, không nêu tên model hay sai số."
+  },
   "findings": [
     { "title": "Kết luận, không phải tên chỉ số",
       "detail": "1-2 câu giải thích",
@@ -195,7 +199,17 @@ trường là mục tương ứng biến mất khỏi email.
 }
 ```
 
-Quy ước bắt buộc:
+**Hai tầng ngôn ngữ — đây là quy ước quan trọng nhất của file này:**
+
+| Trường | Đi vào đâu | Viết cho ai |
+|---|---|---|
+| `executive.summary`, `executive.outlook`, `kpis`, `strategy` | **Email** | Lãnh đạo không chuyên về dữ liệu. Cấm dùng: MAPE, p-value, R², tên model, điểm tin cậy, "hiệu ứng giá/sản lượng", "nghịch lý Simpson", AOV, YoY |
+| `findings`, `risks`, `confidence` | **Report HTML** | Người muốn kiểm chứng. Bắt buộc kèm bằng chứng thống kê |
+
+Cùng một nguồn số, khác cách kể. Sửa narrative ở Bước 3 phải giữ đúng ranh giới
+này — đẩy thuật ngữ vào email là làm hỏng mục đích của nó.
+
+Quy ước khác:
 
 - `direction` chỉ nhận `"up"` / `"down"` / `"flat"` — quyết định màu trong email
 - `report_file` là đường dẫn **tương đối từ repo root**, phải trỏ đúng file vừa tạo

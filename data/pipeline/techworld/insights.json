@@ -13,7 +13,7 @@
     {
       "label": "Doanh thu",
       "value": "$1.83M",
-      "delta": "-4.1% YoY",
+      "delta": "-4.1% so với 2022",
       "direction": "down"
     },
     {
@@ -23,18 +23,28 @@
       "direction": "flat"
     },
     {
-      "label": "Giá trị đơn (AOV)",
+      "label": "Giá trị mỗi đơn",
       "value": "$661",
       "delta": "-4.2% so với đầu kỳ",
       "direction": "down"
     },
     {
-      "label": "Dự báo 6 kỳ",
+      "label": "Dự báo 6 tháng tới",
       "value": "$363K",
-      "delta": "MAPE 5.73%",
+      "delta": "ước tính",
       "direction": "flat"
     }
   ],
+  "executive": {
+    "summary": [
+      "Doanh thu 2023 đạt $729K, giảm 4.1% so với 2022. Tỷ lệ lợi nhuận giữ nguyên ở 33%.",
+      "Lượng khách mua không giảm — số đơn gần như không đổi (1,110 lên 1,111 đơn). Vấn đề là mỗi đơn nhỏ đi $29, từ $685 xuống $657.",
+      "Electronics chiếm 87% doanh thu và giảm 6%, đủ để kéo cả công ty đi xuống. Các nhóm còn lại đều tăng (Wearables +19%, Accessories +10%, Audio +3%) nhưng còn quá nhỏ để bù lại.",
+      "Vùng West là nơi duy nhất tăng trưởng (+3%) trong khi các vùng khác đều giảm.",
+      "Tháng 10 luôn là tháng cao điểm, Tháng 4 thấp nhất năm — chênh nhau khoảng 29% doanh thu. Nên chốt tồn kho và ngân sách quảng cáo theo nhịp này."
+    ],
+    "outlook": "6 tháng tới ước đạt $337K – $390K, với cao điểm rơi vào Tháng 10 khoảng $68K."
+  },
   "findings": [
     {
       "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$32K so với sản lượng $685",
@@ -108,8 +118,8 @@
   "strategy": [
     {
       "action": "Dựng lại giá trị đơn: bán kèm và nâng cấp cấu hình tại bước thanh toán",
-      "rationale": "AOV rơi $29/đơn trong khi số đơn vẫn tăng — lưu lượng khách không phải vấn đề, giỏ hàng mới là vấn đề.",
-      "impact": "Lấy lại được AOV cũ tương đương $32K/năm",
+      "rationale": "Mỗi đơn nhỏ đi $29 trong khi số khách mua không giảm — vấn đề nằm ở giỏ hàng, không phải ở lượng khách.",
+      "impact": "Đưa giá trị đơn về mức cũ tương đương $32K/năm",
       "effort": "Trung bình",
       "owner_hint": "Thương mại điện tử",
       "priority": 1
@@ -140,7 +150,7 @@
     },
     {
       "action": "Chốt tồn kho và ngân sách quảng cáo cho Tháng 10 trước ít nhất 6 tuần",
-      "rationale": "Tháng 10 luôn là đỉnh (chỉ số 117); dự báo kỳ này $68K.",
+      "rationale": "Tháng 10 năm nào cũng cao hơn trung bình 17%; dự báo kỳ này $68K.",
       "impact": "Tránh hụt hàng ở kỳ cao điểm ≈ $68K",
       "effort": "Thấp",
       "owner_hint": "Chuỗi cung ứng",

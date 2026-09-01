@@ -74,7 +74,7 @@ git push -u origin main
 ```
 
 > Repo nên để **Private** — data kinh doanh không nên public. Repo private free có
-> 2000 phút Actions/tháng; pipeline này dùng ~6 phút/tuần (~25 phút/tháng), thừa sức trong hạn mức.
+> 2000 phút Actions/tháng; pipeline này dùng ~1 phút/tuần, thừa sức trong hạn mức.
 
 ---
 
@@ -135,9 +135,10 @@ Email gồm: headline, 4 KPI, các finding chính, dự báo, khuyến nghị h�
 
 1. Tab **Actions** → **"Weekly Business Analysis"** → **"Run workflow"**
    → tick **force** nếu đã từng chạy rồi
-2. Chờ ~4-6 phút (lần đầu lâu vì phải cài `prophet`; các lần sau pip cache lại còn ~1 phút)
+2. Chờ ~1 phút (đo thực tế: cài dependency 24s, phân tích 11s)
 3. Mở log step **"Kiểm tra thư viện dự báo"** — phải thấy `OK statsmodels` và `OK prophet`
-4. Mở log step **"Tính metrics"** — xem model nào thắng backtest
+4. Mở log step **"Tính metrics"** — có bảng so sánh MAPE của cả 5 model và dòng
+   `← chọn` ở model thắng
 5. Tab **Code** → thư mục `data/reports/` phải có file HTML mới
 6. Tab **Actions** → **"Weekly Business Email"** → **"Run workflow"** để test gửi mail
 

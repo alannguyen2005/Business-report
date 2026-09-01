@@ -434,8 +434,15 @@ def sarima(series: np.ndarray, horizon: int, season: int = 12,
     """SARIMA(1,1,1)(1,1,0,s) — cần statsmodels."""
     if SARIMAX is None:
         raise RuntimeError("statsmodels chưa được cài")
-    # Chuỗi ngắn hơn 2 chu kỳ mùa thì bỏ thành phần mùa vụ, tránh model không hội tụ
-    seasonal_order = (1, 1, 0, season) if len(series) >= season * 2 else (0, 0, 0, 0)
+    # Bậc mùa vụ chọn theo độ dài chuỗi. Sai phân mùa vụ (D=1) ăn mất trọn một
+    # chu kỳ quan sát, nên chỉ dùng khi có từ 3 chu kỳ trở lên; 2 chu kỳ thì
+    # dùng AR mùa vụ không sai phân, dưới nữa thì bỏ hẳn thành phần mùa vụ.
+    if len(series) >= season * 3:
+        seasonal_order = (1, 1, 0, season)
+    elif len(series) >= season * 2:
+        seasonal_order = (1, 0, 0, season)
+    else:
+        seasonal_order = (0, 0, 0, 0)
     model = SARIMAX(series, order=(1, 1, 1), seasonal_order=seasonal_order,
                     enforce_stationarity=False, enforce_invertibility=False)
     fitted = model.fit(disp=False)
@@ -572,6 +579,21 @@ def build_predictive(desc: dict) -> dict:
 
     last_period = pd.Period(labels[-1], freq="M" if ANALYSIS.get("grain") == "monthly" else "W")
     future_labels = [str(last_period + i) for i in range(1, horizon + 1)]
+
+    # In bảng so sánh — để log của mỗi lần chạy tự trả lời "model nào thắng"
+    print(f"\n  Backtest: {len(train)} kỳ train / {holdout} kỳ test")
+    for r in sorted(results, key=lambda r: (r["mape"] is None, r["mape"] or 0)):
+        if r["mape"] is None:
+            print(f"    {r['model']:16}    —      loại ({r['error']})")
+        else:
+            mark = "← chọn" if r["model"] == chosen else ""
+            base = " (baseline)" if r["model"] == BASELINE_MODEL else ""
+            print(f"    {r['model']:16} MAPE {r['mape']:6.2f}%{base:12} {mark}")
+    if baseline and baseline["mape"] is not None and chosen != BASELINE_MODEL:
+        gain = baseline["mape"] - best["mape"]
+        print(f"    → {chosen} tốt hơn baseline {gain:.2f} điểm MAPE")
+    elif chosen == BASELINE_MODEL:
+        print("    → không model nào thắng baseline, dùng baseline")
 
     return {
         "enabled": True,

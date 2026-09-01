@@ -427,6 +427,18 @@ def build_risks(f: dict, profile: dict) -> list[str]:
         for reason, models in by_reason.items():
             risks.append(f"Model {', '.join(models)} không chạy được ({reason}) — "
                          f"dự báo dùng {pred['chosen_model']} thay thế.")
+    # Model mùa vụ (SARIMA, Holt-Winters, Prophet) cần nhiều chu kỳ để ước lượng
+    # ổn định. Dưới 3 chu kỳ thì chúng vẫn chạy nhưng kết quả mong manh — nói ra,
+    # đừng để người đọc tưởng dự báo chắc hơn thực tế.
+    if pred.get("enabled"):
+        train_periods = (pred.get("backtest") or {}).get("train_periods", 0)
+        season = 12 if CONFIG["analysis"].get("grain") == "monthly" else 52
+        if 0 < train_periods < season * 3:
+            risks.append(
+                f"Chỉ có {train_periods} kỳ để huấn luyện ({train_periods/season:.1f} "
+                f"chu kỳ mùa vụ). Các model mùa vụ cần tối thiểu 3 chu kỳ mới ước "
+                f"lượng ổn định — dự báo nên đọc như một khoảng, không phải con số chính xác.")
+
     if pred.get("enabled") and pred.get("chosen_mape", 0) > 10:
         risks.append(f"Sai số dự báo {pred['chosen_mape']}% khá cao — dùng khoảng "
                      f"dự báo, đừng bám con số điểm.")

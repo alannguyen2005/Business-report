@@ -1,0 +1,89 @@
+# ─── CẤU HÌNH CHÍNH — Business Performance Analyst ────────────────
+# Đổi data nguồn? CHỈ sửa file này. Agent và script đều đọc từ đây.
+
+# ─── NGUỒN DỮ LIỆU ───────────────────────────────────────────────
+data:
+  # Đường dẫn tới file kết quả kinh doanh (CSV hoặc XLSX), tương đối từ repo root.
+  # Đổi data sau này = đổi đúng dòng này + block `schema` bên dưới.
+  file: ai_analyst/data/raw/techworld_data.csv
+
+  # Tên định danh cho run (dùng đặt tên thư mục pipeline & report).
+  stem: techworld
+
+  # Mô tả ngắn về doanh nghiệp — agent dùng để đặt bối cảnh phân tích.
+  business_context: >
+    TechWorld — nhà bán lẻ thương mại điện tử ngành điện tử tiêu dùng.
+    4 nhóm hàng (Electronics, Audio, Accessories, Wearables),
+    bán trên 4 vùng (North/South/East/West) qua 6 kênh traffic.
+
+# ─── SCHEMA — ánh xạ cột trong file sang vai trò phân tích ────────
+# Đổi data = sửa block này cho khớp tên cột mới. Để trống nếu không có.
+schema:
+  date: Order_Date              # cột thời gian
+  date_format: "%m/%d/%Y"       # định dạng ngày trong file
+  revenue: Sales                # doanh thu / giá trị đơn
+  profit: Net_Profit            # lợi nhuận
+  quantity: Quantity
+  unit_price: Unit_Price
+  cost_columns:                 # các cột chi phí, dùng cho phân tích margin
+    - Marketing_Cost
+    - Shipping_Cost
+  transaction_id: Order_ID
+  customer_id: Customer_ID
+  status: Order_Status          # cột trạng thái đơn
+  status_valid: Completed       # giá trị coi là đơn hợp lệ
+  dimensions:                   # các chiều để cắt lát phân tích
+    - Region
+    - Category
+    - Product_Name
+    - Traffic_Source
+    - Supplier
+
+# ─── PHÂN TÍCH ───────────────────────────────────────────────────
+analysis:
+  grain: monthly                # monthly | weekly — grain của time series
+  compare_mode: yoy             # yoy | pop — so sánh cùng kỳ hay kỳ liền trước
+  top_n_findings: 5             # số finding đưa vào report
+  top_n_dimensions: 5           # số hạng mục top trong mỗi chiều
+  min_periods_for_trend: 12     # dưới ngưỡng này thì không kết luận xu hướng
+
+# ─── DỰ BÁO ──────────────────────────────────────────────────────
+forecast:
+  enabled: true
+  horizon: 6                    # số kỳ dự báo (theo `analysis.grain`)
+  target: revenue               # revenue | profit
+  models:                       # pipeline backtest tất cả rồi chọn model tốt nhất
+    - seasonal_naive            # baseline bắt buộc — luôn chạy dù không liệt kê
+    - trend_seasonal            # hồi quy xu hướng x chỉ số mùa vụ (chỉ cần numpy)
+    - sarima                    # cần statsmodels
+    - holt_winters              # cần statsmodels
+    - prophet                   # cần prophet (nặng, ~2-4 phút cài trên runner)
+  confidence_interval: 0.80     # khoảng tin cậy hiển thị trên chart
+
+# ─── CHIẾN LƯỢC ──────────────────────────────────────────────────
+strategy:
+  enabled: true
+  max_actions: 5                # số khuyến nghị tối đa trong report
+  horizon_label: "2 quý tới"    # tầm nhìn của khuyến nghị
+  require_sizing: true          # mỗi action phải kèm ước lượng tác động ($ hoặc %)
+
+# ─── REPORT ──────────────────────────────────────────────────────
+report:
+  format: html                  # html | pptx | both
+  language: vi                  # vi | en
+  output_dir: data/reports
+  filename_pattern: "business_report_{date}"
+
+# ─── EMAIL ───────────────────────────────────────────────────────
+email:
+  enabled: true
+  attach_report: true           # đính kèm file report vào email
+  subject_pattern: "Business Review — {date}"
+  # Địa chỉ nhận lấy từ GitHub Secret EMAIL_TO (không hardcode ở đây).
+
+# ─── LỊCH CHẠY ───────────────────────────────────────────────────
+schedule:
+  cadence: weekly
+  run_day: monday               # ngày chạy phân tích
+  # Giờ cụ thể cấu hình ở .github/workflows/weekly_email.yml và Claude Routine.
+  max_data_age_days: 0          # 0 = tắt kiểm tra độ tươi (data mẫu là lịch sử tĩnh)

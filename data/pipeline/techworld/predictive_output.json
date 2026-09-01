@@ -1,0 +1,215 @@
+{
+  "enabled": true,
+  "target": "revenue",
+  "horizon": 6,
+  "chosen_model": "trend_seasonal",
+  "chosen_mape": 5.73,
+  "baseline_model": "seasonal_naive",
+  "baseline_mape": 11.79,
+  "beat_baseline": true,
+  "backtest": {
+    "train_periods": 24,
+    "test_periods": 6,
+    "results": [
+      {
+        "model": "seasonal_naive",
+        "mape": 11.79,
+        "available": true
+      },
+      {
+        "model": "trend_seasonal",
+        "mape": 5.73,
+        "available": true
+      },
+      {
+        "model": "sarima",
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: statsmodels chưa được cài"
+      },
+      {
+        "model": "holt_winters",
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: statsmodels chưa được cài"
+      },
+      {
+        "model": "prophet",
+        "mape": null,
+        "available": false,
+        "error": "RuntimeError: prophet chưa được cài"
+      }
+    ]
+  },
+  "history": [
+    {
+      "period": "2022-01",
+      "value": 73060.0
+    },
+    {
+      "period": "2022-02",
+      "value": 67540.0
+    },
+    {
+      "period": "2022-03",
+      "value": 57810.0
+    },
+    {
+      "period": "2022-04",
+      "value": 52500.0
+    },
+    {
+      "period": "2022-05",
+      "value": 49390.0
+    },
+    {
+      "period": "2022-06",
+      "value": 69930.0
+    },
+    {
+      "period": "2022-07",
+      "value": 57910.0
+    },
+    {
+      "period": "2022-08",
+      "value": 68610.0
+    },
+    {
+      "period": "2022-09",
+      "value": 60840.0
+    },
+    {
+      "period": "2022-10",
+      "value": 82110.0
+    },
+    {
+      "period": "2022-11",
+      "value": 53400.0
+    },
+    {
+      "period": "2022-12",
+      "value": 67650.0
+    },
+    {
+      "period": "2023-01",
+      "value": 68450.0
+    },
+    {
+      "period": "2023-02",
+      "value": 53640.0
+    },
+    {
+      "period": "2023-03",
+      "value": 56360.0
+    },
+    {
+      "period": "2023-04",
+      "value": 56480.0
+    },
+    {
+      "period": "2023-05",
+      "value": 61390.0
+    },
+    {
+      "period": "2023-06",
+      "value": 50330.0
+    },
+    {
+      "period": "2023-07",
+      "value": 56340.0
+    },
+    {
+      "period": "2023-08",
+      "value": 56480.0
+    },
+    {
+      "period": "2023-09",
+      "value": 67310.0
+    },
+    {
+      "period": "2023-10",
+      "value": 63260.0
+    },
+    {
+      "period": "2023-11",
+      "value": 68810.0
+    },
+    {
+      "period": "2023-12",
+      "value": 70610.0
+    },
+    {
+      "period": "2024-01",
+      "value": 60260.0
+    },
+    {
+      "period": "2024-02",
+      "value": 63750.0
+    },
+    {
+      "period": "2024-03",
+      "value": 52950.0
+    },
+    {
+      "period": "2024-04",
+      "value": 52580.0
+    },
+    {
+      "period": "2024-05",
+      "value": 54520.0
+    },
+    {
+      "period": "2024-06",
+      "value": 59090.0
+    }
+  ],
+  "points": [
+    {
+      "period": "2024-07",
+      "value": 53699.17681464368,
+      "lo": 49754.5104646875,
+      "hi": 57643.843164599864
+    },
+    {
+      "period": "2024-08",
+      "value": 58700.94665555455,
+      "lo": 54388.85729556283,
+      "hi": 63013.03601554627
+    },
+    {
+      "period": "2024-09",
+      "value": 60280.42721008252,
+      "lo": 55852.31141982795,
+      "hi": 64708.543000337086
+    },
+    {
+      "period": "2024-10",
+      "value": 68157.32309536447,
+      "lo": 63150.58156103133,
+      "hi": 73164.0646296976
+    },
+    {
+      "period": "2024-11",
+      "value": 57543.949360188555,
+      "lo": 53316.85140171821,
+      "hi": 61771.0473186589
+    },
+    {
+      "period": "2024-12",
+      "value": 64973.218940693085,
+      "lo": 60200.377239816284,
+      "hi": 69746.06064156989
+    }
+  ],
+  "total_forecast": 363355.04207652685,
+  "unavailable_models": [
+    "sarima",
+    "holt_winters",
+    "prophet"
+  ],
+  "unavailable_detail": {
+    "sarima": "RuntimeError: statsmodels chưa được cài",
+    "holt_winters": "RuntimeError: statsmodels chưa được cài",
+    "prophet": "RuntimeError: prophet chưa được cài"
+  }
+}

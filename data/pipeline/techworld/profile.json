@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-09-01",
+  "issues": [
+    {
+      "severity": "medium",
+      "issue": "Net_Profit: 54 dòng dùng dấu phẩy làm thập phân",
+      "action": "đã chuẩn hoá về dấu chấm"
+    },
+    {
+      "severity": "medium",
+      "issue": "Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân",
+      "action": "đã chuẩn hoá về dấu chấm"
+    },
+    {
+      "severity": "medium",
+      "issue": "Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
+      "action": "giữ nguyên — chưa rõ là upsert hay lỗi nhập"
+    },
+    {
+      "severity": "info",
+      "issue": "101 đơn không ở trạng thái 'Completed'",
+      "action": "loại khỏi phân tích doanh thu (3.4%)"
+    }
+  ],
+  "rows_raw": 3000,
+  "rows_analyzed": 2899,
+  "excluded_rows": 101,
+  "confidence": {
+    "grade": "C",
+    "score": 68,
+    "reasons": [
+      "Net_Profit: 54 dòng dùng dấu phẩy làm thập phân",
+      "Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân",
+      "Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
+      "năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn"
+    ]
+  }
+}

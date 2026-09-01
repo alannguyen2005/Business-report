@@ -1,0 +1,115 @@
+{
+  "report_type": "business",
+  "big_answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu.",
+  "verdict_sentence": "$1.83M doanh thu · biên 33.1% · YoY -4.1% · dự báo $363K",
+  "header_kpis": [
+    {
+      "label": "Doanh thu",
+      "value": "$1.83M",
+      "delta": "-4.1% YoY",
+      "status": "alert"
+    },
+    {
+      "label": "Biên lợi nhuận",
+      "value": "33.1%",
+      "delta": "không đổi",
+      "status": "flat"
+    },
+    {
+      "label": "Giá trị đơn (AOV)",
+      "value": "$632",
+      "delta": "-4.6% so với đầu kỳ",
+      "status": "alert"
+    }
+  ],
+  "scqa": {
+    "situation": "TechWorld — nhà bán lẻ thương mại điện tử ngành điện tử tiêu dùng. 4 nhóm hàng (Electronics, Audio, Accessories, Wearables), bán trên 4 vùng (North/South/East/West) qua 6 kênh traffic. Kỳ phân tích 2022-01-01 → 2024-06-29: $1.83M doanh thu từ 2,899 đơn hợp lệ, biên lợi nhuận 33.1%.",
+    "complication": "Doanh thu 2023 giảm $31K (-4.1%) so với 2022, trong khi số đơn lại tăng +0.5% và biên lợi nhuận giữ nguyên. Chi phí và nhu cầu đều không phải nguyên nhân.",
+    "question": "Điều gì đang bào mòn giá trị mỗi đơn, nhóm nào còn tăng trưởng, và nên dồn nguồn lực vào đâu trong 2 quý tới?",
+    "answer": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu. 6 kỳ tới dự báo tổng $363K bằng model trend_seasonal (MAPE 5.73% so với baseline 11.79%)."
+  },
+  "sections": [
+    {
+      "id": "descriptive",
+      "title": "Kết quả kinh doanh: $1.83M, biên 33.1%, xu hướng đi ngang — biến động không có ý nghĩa thống kê",
+      "bridge_in": "2022-01-01 → 2024-06-29 · 2,899 đơn hợp lệ · 30 kỳ",
+      "bridge_out": "Biên lợi nhuận không đổi đã loại chi phí khỏi danh sách nghi vấn — nguyên nhân nằm ở cấu trúc doanh thu.",
+      "findings": [
+        {
+          "tag": "Trend",
+          "title": "Xu hướng 30 kỳ: đi ngang — biến động không có ý nghĩa thống kê",
+          "evidence": "Hồi quy tuyến tính cho hệ số góc -$176/kỳ, nhưng R²=0.039 và p=0.297 — chưa đủ bằng chứng thống kê để gọi đây là một xu hướng.",
+          "supporting_data": "Biến động giữa các kỳ chủ yếu là mùa vụ, không phải suy giảm cấu trúc."
+        },
+        {
+          "tag": "Pattern",
+          "title": "Mùa vụ dao động 29 điểm — đỉnh Tháng 10, đáy Tháng 4",
+          "evidence": "Tháng 10 đạt chỉ số 117 (cao hơn trung bình 17%), Tháng 4 chỉ 88. Kế hoạch tồn kho và ngân sách quảng cáo nên bám nhịp này.",
+          "supporting_data": "Chỉ số tính trên các năm trọn vẹn: [2022, 2023]."
+        }
+      ],
+      "charts": [
+        "monthly_revenue_trend"
+      ]
+    },
+    {
+      "id": "diagnostic",
+      "title": "Nguyên nhân: giá trị đơn quyết định biến động",
+      "bridge_in": "So sánh 2022 vs 2023 · phân tách theo nhóm hàng, vùng, kênh",
+      "bridge_out": "Đa số nhóm hàng vẫn tăng — vấn đề là cơ cấu, không phải toàn bộ danh mục suy yếu.",
+      "findings": [
+        {
+          "tag": "Root Cause",
+          "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$35K so với sản lượng $4K",
+          "evidence": "Số đơn tăng từ 1,162 lên 1,168 nhưng AOV rơi từ $655 xuống $625. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
+          "supporting_data": "Phân tách biến động -$31K: hiệu ứng sản lượng $4K, hiệu ứng giá -$35K."
+        },
+        {
+          "tag": "Contrast",
+          "title": "3/4 nhóm hàng vẫn tăng — tổng bị Electronics (87% doanh thu) kéo xuống",
+          "evidence": "Wearables tăng +19.4% và Accessories +9.8%, Audio +3.2%. Nhưng Electronics giảm -6.0% trên nền 87% doanh thu nên áp đảo toàn bộ.",
+          "supporting_data": "Đây là nghịch lý Simpson: nhìn tổng thấy giảm, nhìn từng nhóm thì đa số đang tăng. Các nhóm tăng cộng lại chỉ chiếm 13% doanh thu."
+        },
+        {
+          "tag": "Implication",
+          "title": "Electronics chiếm 87% doanh thu — rủi ro tập trung cao",
+          "evidence": "Kết quả kinh doanh gần như là kết quả của riêng Electronics. Mọi biến động của nhóm này đi thẳng vào tổng doanh thu mà không có nhóm nào đủ lớn để bù.",
+          "supporting_data": "Hai hạng mục lớn nhất chiếm 92% doanh thu."
+        }
+      ],
+      "charts": [
+        "yoy_waterfall",
+        "category_yoy"
+      ]
+    },
+    {
+      "id": "predictive",
+      "title": "Dự báo 6 kỳ: tổng $363K",
+      "bridge_in": "Backtest 24 kỳ train / 6 kỳ test · khoảng tin cậy 80%",
+      "bridge_out": "Dự báo giả định cơ cấu danh mục không đổi — mọi hành động ở phần khuyến nghị đều nhằm thay đổi giả định đó.",
+      "findings": [
+        {
+          "tag": "Model Selection",
+          "title": "trend_seasonal thắng baseline: MAPE 5.73% so với 11.79%",
+          "evidence": "Backtest trên 6 kỳ cuối với cùng một tập train/test cho mọi model.",
+          "supporting_data": "seasonal_naive: 11.79% · trend_seasonal: 5.73%"
+        },
+        {
+          "tag": "Forecast",
+          "title": "Kỳ cao điểm dự báo $68K",
+          "evidence": "6 kỳ tới dự báo tổng $363K bằng model trend_seasonal (MAPE 5.73% so với baseline 11.79%).",
+          "supporting_data": "2024-07: $54K · 2024-08: $59K · 2024-09: $60K · 2024-10: $68K · 2024-11: $58K · 2024-12: $65K"
+        }
+      ],
+      "charts": [
+        "revenue_forecast",
+        "model_comparison"
+      ]
+    }
+  ],
+  "confidence": {
+    "grade": "C",
+    "score": 68,
+    "interpretation": "Grade C (68/100). Các vấn đề đã ghi nhận: Net_Profit: 54 dòng dùng dấu phẩy làm thập phân; Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân; Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng); năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn. Mọi con số trong báo cáo tính từ file data gốc, không nhập tay."
+  }
+}

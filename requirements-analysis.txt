@@ -1,0 +1,13 @@
+# Thư viện cho bước phân tích (chạy trên GitHub Actions, Ubuntu x86-64).
+# Tách khỏi requirements.txt để workflow gửi mail không phải cài đống này.
+#
+# Lưu ý: statsmodels và prophet KHÔNG có wheel cho Windows ARM64.
+# Trên máy đó pipeline vẫn chạy, chỉ tự bỏ qua sarima/holt_winters/prophet.
+
+pandas>=2.2,<2.4
+numpy>=1.26,<2.3
+scipy>=1.11,<1.15
+statsmodels>=0.14.2,<0.15
+prophet>=1.1.5,<2
+pyyaml>=6.0
+openpyxl>=3.1

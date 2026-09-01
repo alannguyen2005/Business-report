@@ -1,0 +1,534 @@
+{
+  "totals": {
+    "revenue": 1833360.0,
+    "orders": 2899,
+    "aov": 632.4111762676785,
+    "period_start": "2022-01-01",
+    "period_end": "2024-06-29",
+    "periods": 30,
+    "profit": 607358.0,
+    "margin": 0.33128136318017193,
+    "unique_transactions": 2772,
+    "aov_first_year": 654.6901893287436,
+    "aov_last_year": 624.5376712328767,
+    "aov_change_pct": -4.6056163033055935
+  },
+  "monthly": [
+    {
+      "period": "2022-01",
+      "revenue": 73060,
+      "profit": 23927.0,
+      "orders": 97,
+      "units": 130,
+      "aov": 753.1959,
+      "margin": 0.3275
+    },
+    {
+      "period": "2022-02",
+      "revenue": 67540,
+      "profit": 22264.0,
+      "orders": 98,
+      "units": 115,
+      "aov": 689.1837,
+      "margin": 0.3296
+    },
+    {
+      "period": "2022-03",
+      "revenue": 57810,
+      "profit": 19125.0,
+      "orders": 96,
+      "units": 111,
+      "aov": 602.1875,
+      "margin": 0.3308
+    },
+    {
+      "period": "2022-04",
+      "revenue": 52500,
+      "profit": 17378.0,
+      "orders": 98,
+      "units": 111,
+      "aov": 535.7143,
+      "margin": 0.331
+    },
+    {
+      "period": "2022-05",
+      "revenue": 49390,
+      "profit": 16916.0,
+      "orders": 95,
+      "units": 119,
+      "aov": 519.8947,
+      "margin": 0.3425
+    },
+    {
+      "period": "2022-06",
+      "revenue": 69930,
+      "profit": 23707.0,
+      "orders": 95,
+      "units": 133,
+      "aov": 736.1053,
+      "margin": 0.339
+    },
+    {
+      "period": "2022-07",
+      "revenue": 57910,
+      "profit": 19041.0,
+      "orders": 95,
+      "units": 122,
+      "aov": 609.5789,
+      "margin": 0.3288
+    },
+    {
+      "period": "2022-08",
+      "revenue": 68610,
+      "profit": 22719.0,
+      "orders": 98,
+      "units": 115,
+      "aov": 700.102,
+      "margin": 0.3311
+    },
+    {
+      "period": "2022-09",
+      "revenue": 60840,
+      "profit": 19676.0,
+      "orders": 99,
+      "units": 114,
+      "aov": 614.5455,
+      "margin": 0.3234
+    },
+    {
+      "period": "2022-10",
+      "revenue": 82110,
+      "profit": 27108.0,
+      "orders": 98,
+      "units": 138,
+      "aov": 837.8571,
+      "margin": 0.3301
+    },
+    {
+      "period": "2022-11",
+      "revenue": 53400,
+      "profit": 17726.0,
+      "orders": 97,
+      "units": 107,
+      "aov": 550.5155,
+      "margin": 0.3319
+    },
+    {
+      "period": "2022-12",
+      "revenue": 67650,
+      "profit": 22392.0,
+      "orders": 96,
+      "units": 127,
+      "aov": 704.6875,
+      "margin": 0.331
+    },
+    {
+      "period": "2023-01",
+      "revenue": 68450,
+      "profit": 22539.0,
+      "orders": 98,
+      "units": 133,
+      "aov": 698.4694,
+      "margin": 0.3293
+    },
+    {
+      "period": "2023-02",
+      "revenue": 53640,
+      "profit": 17713.0,
+      "orders": 95,
+      "units": 120,
+      "aov": 564.6316,
+      "margin": 0.3302
+    },
+    {
+      "period": "2023-03",
+      "revenue": 56360,
+      "profit": 18817.0,
+      "orders": 99,
+      "units": 125,
+      "aov": 569.2929,
+      "margin": 0.3339
+    },
+    {
+      "period": "2023-04",
+      "revenue": 56480,
+      "profit": 18973.0,
+      "orders": 95,
+      "units": 121,
+      "aov": 594.5263,
+      "margin": 0.3359
+    },
+    {
+      "period": "2023-05",
+      "revenue": 61390,
+      "profit": 20399.0,
+      "orders": 96,
+      "units": 125,
+      "aov": 639.4792,
+      "margin": 0.3323
+    },
+    {
+      "period": "2023-06",
+      "revenue": 50330,
+      "profit": 16895.0,
+      "orders": 97,
+      "units": 122,
+      "aov": 518.866,
+      "margin": 0.3357
+    },
+    {
+      "period": "2023-07",
+      "revenue": 56340,
+      "profit": 18645.0,
+      "orders": 99,
+      "units": 118,
+      "aov": 569.0909,
+      "margin": 0.3309
+    },
+    {
+      "period": "2023-08",
+      "revenue": 56480,
+      "profit": 18569.0,
+      "orders": 99,
+      "units": 118,
+      "aov": 570.5051,
+      "margin": 0.3288
+    },
+    {
+      "period": "2023-09",
+      "revenue": 67310,
+      "profit": 21954.0,
+      "orders": 98,
+      "units": 114,
+      "aov": 686.8367,
+      "margin": 0.3262
+    },
+    {
+      "period": "2023-10",
+      "revenue": 63260,
+      "profit": 20962.0,
+      "orders": 97,
+      "units": 126,
+      "aov": 652.1649,
+      "margin": 0.3314
+    },
+    {
+      "period": "2023-11",
+      "revenue": 68810,
+      "profit": 23046.0,
+      "orders": 99,
+      "units": 130,
+      "aov": 695.0505,
+      "margin": 0.3349
+    },
+    {
+      "period": "2023-12",
+      "revenue": 70610,
+      "profit": 23042.0,
+      "orders": 96,
+      "units": 124,
+      "aov": 735.5208,
+      "margin": 0.3263
+    },
+    {
+      "period": "2024-01",
+      "revenue": 60260,
+      "profit": 19810.0,
+      "orders": 99,
+      "units": 120,
+      "aov": 608.6869,
+      "margin": 0.3287
+    },
+    {
+      "period": "2024-02",
+      "revenue": 63750,
+      "profit": 21097.0,
+      "orders": 94,
+      "units": 112,
+      "aov": 678.1915,
+      "margin": 0.3309
+    },
+    {
+      "period": "2024-03",
+      "revenue": 52950,
+      "profit": 17518.0,
+      "orders": 96,
+      "units": 115,
+      "aov": 551.5625,
+      "margin": 0.3308
+    },
+    {
+      "period": "2024-04",
+      "revenue": 52580,
+      "profit": 17490.0,
+      "orders": 89,
+      "units": 106,
+      "aov": 590.7865,
+      "margin": 0.3326
+    },
+    {
+      "period": "2024-05",
+      "revenue": 54520,
+      "profit": 18051.0,
+      "orders": 94,
+      "units": 105,
+      "aov": 580.0,
+      "margin": 0.3311
+    },
+    {
+      "period": "2024-06",
+      "revenue": 59090,
+      "profit": 19859.0,
+      "orders": 97,
+      "units": 127,
+      "aov": 609.1753,
+      "margin": 0.3361
+    }
+  ],
+  "trend": {
+    "slope_per_period": -175.83092324805338,
+    "r_squared": 0.03870158749680781,
+    "p_value": 0.29743036310320997,
+    "significant": false,
+    "periods": 30,
+    "verdict": "đi ngang — biến động không có ý nghĩa thống kê"
+  },
+  "yoy": {
+    "prev_year": 2022,
+    "curr_year": 2023,
+    "revenue_prev": 760750.0,
+    "revenue_curr": 729460.0,
+    "revenue_change_pct": -4.113046335852777,
+    "orders_change_pct": 0.5163511187607606,
+    "margin_prev": 0.3312244495563589,
+    "margin_curr": 0.3311408439119349
+  },
+  "partial_compare": {
+    "label": "1-6/2024 vs cùng kỳ 2023",
+    "revenue_curr": 343150.0,
+    "revenue_prev": 346650.0,
+    "change_pct": -1.0096639261502949,
+    "note": "2024 chỉ có 6 kỳ — không so cả năm được"
+  },
+  "seasonality": {
+    "index": {
+      "1": 114.0,
+      "2": 97.6,
+      "3": 91.9,
+      "4": 87.8,
+      "5": 89.2,
+      "6": 96.8,
+      "7": 92.0,
+      "8": 100.7,
+      "9": 103.2,
+      "10": 117.1,
+      "11": 98.4,
+      "12": 111.3
+    },
+    "peak_month": 10,
+    "peak_index": 117.1,
+    "trough_month": 4,
+    "trough_index": 87.8,
+    "swing_pp": 29.299999999999997,
+    "basis_years": [
+      2022,
+      2023
+    ]
+  },
+  "dimensions": {
+    "Region": [
+      {
+        "name": "East",
+        "revenue": 468270.0,
+        "orders": 738,
+        "share_pct": 25.54162848540385,
+        "yoy_pct": -7.012303174522804,
+        "yoy_abs": -13850.0
+      },
+      {
+        "name": "South",
+        "revenue": 461020.0,
+        "orders": 717,
+        "share_pct": 25.146179691931753,
+        "yoy_pct": -7.733359687700747,
+        "yoy_abs": -15650.0
+      },
+      {
+        "name": "North",
+        "revenue": 454680.0,
+        "orders": 742,
+        "share_pct": 24.800366540123054,
+        "yoy_pct": -4.4579983365677815,
+        "yoy_abs": -8040.0
+      },
+      {
+        "name": "West",
+        "revenue": 449390.0,
+        "orders": 702,
+        "share_pct": 24.511825282541345,
+        "yoy_pct": 3.4622202526035872,
+        "yoy_abs": 6250.0
+      }
+    ],
+    "Category": [
+      {
+        "name": "Electronics",
+        "revenue": 1597300.0,
+        "orders": 1451,
+        "share_pct": 87.1241872845486,
+        "yoy_pct": -6.018173692834794,
+        "yoy_abs": -40400.0
+      },
+      {
+        "name": "Audio",
+        "revenue": 91240.0,
+        "orders": 497,
+        "share_pct": 4.976654885019855,
+        "yoy_pct": 3.205128205128216,
+        "yoy_abs": 1200.0
+      },
+      {
+        "name": "Wearables",
+        "revenue": 84300.0,
+        "orders": 233,
+        "share_pct": 4.598114936510014,
+        "yoy_pct": 19.387755102040828,
+        "yoy_abs": 5700.0
+      },
+      {
+        "name": "Accessories",
+        "revenue": 60520.0,
+        "orders": 718,
+        "share_pct": 3.301042893921543,
+        "yoy_pct": 9.774436090225569,
+        "yoy_abs": 2210.0
+      }
+    ],
+    "Product_Name": [
+      {
+        "name": "Laptop Pro X",
+        "revenue": 477000.0,
+        "orders": 247,
+        "share_pct": 26.017803377405418,
+        "yoy_pct": -11.940298507462687,
+        "yoy_abs": -24000.0
+      },
+      {
+        "name": "Laptop Air",
+        "revenue": 336000.0,
+        "orders": 270,
+        "share_pct": 18.32700615263778,
+        "yoy_pct": 5.147058823529416,
+        "yoy_abs": 7000.0
+      },
+      {
+        "name": "Smartphone Z",
+        "revenue": 243000.0,
+        "orders": 224,
+        "share_pct": 13.254352663961253,
+        "yoy_pct": 10.784313725490202,
+        "yoy_abs": 9900.0
+      },
+      {
+        "name": "Smartphone Alpha",
+        "revenue": 217700.0,
+        "orders": 254,
+        "share_pct": 11.87437273639656,
+        "yoy_pct": -29.55974842767296,
+        "yoy_abs": -32900.0
+      },
+      {
+        "name": "Tablet Pro",
+        "revenue": 213600.0,
+        "orders": 221,
+        "share_pct": 11.650739625605446,
+        "yoy_pct": 0.0,
+        "yoy_abs": 0.0
+      }
+    ],
+    "Traffic_Source": [
+      {
+        "name": "Email",
+        "revenue": 322900.0,
+        "orders": 498,
+        "share_pct": 17.61247109132958,
+        "yoy_pct": -22.773286228684007,
+        "yoy_abs": -33520.0
+      },
+      {
+        "name": "Referral",
+        "revenue": 309240.0,
+        "orders": 468,
+        "share_pct": 16.867391019766988,
+        "yoy_pct": 9.66955351887664,
+        "yoy_abs": 11500.0
+      },
+      {
+        "name": "Direct",
+        "revenue": 291010.0,
+        "orders": 458,
+        "share_pct": 15.873041846664048,
+        "yoy_pct": -22.94833976249906,
+        "yoy_abs": -30340.0
+      },
+      {
+        "name": "Facebook Ads",
+        "revenue": 281840.0,
+        "orders": 437,
+        "share_pct": 15.372867303748308,
+        "yoy_pct": -7.576643555258544,
+        "yoy_abs": -9070.0
+      },
+      {
+        "name": "Organic",
+        "revenue": 277600.0,
+        "orders": 470,
+        "share_pct": 15.141597940393595,
+        "yoy_pct": 9.674301729970036,
+        "yoy_abs": 10010.0
+      }
+    ],
+    "Supplier": [
+      {
+        "name": "Supplier_A",
+        "revenue": 381930.0,
+        "orders": 583,
+        "share_pct": 20.83224244010996,
+        "yoy_pct": 15.476105690477882,
+        "yoy_abs": 21730.0
+      },
+      {
+        "name": "Supplier_D",
+        "revenue": 370580.0,
+        "orders": 623,
+        "share_pct": 20.213160535846754,
+        "yoy_pct": -19.652057949930292,
+        "yoy_abs": -32420.0
+      },
+      {
+        "name": "Supplier_C",
+        "revenue": 365400.0,
+        "orders": 563,
+        "share_pct": 19.930619190993585,
+        "yoy_pct": -4.456514626006147,
+        "yoy_abs": -6810.0
+      },
+      {
+        "name": "Supplier_B",
+        "revenue": 361660.0,
+        "orders": 579,
+        "share_pct": 19.726622158223154,
+        "yoy_pct": -8.748878348929622,
+        "yoy_abs": -13650.0
+      },
+      {
+        "name": "Supplier_X",
+        "revenue": 353790.0,
+        "orders": 551,
+        "share_pct": 19.297355674826548,
+        "yoy_pct": -0.09553705472908902,
+        "yoy_abs": -140.0
+      }
+    ]
+  }
+}

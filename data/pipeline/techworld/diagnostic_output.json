@@ -1,0 +1,274 @@
+{
+  "compare": {
+    "prev_year": 2022,
+    "curr_year": 2023,
+    "total_change": -31290.0
+  },
+  "contributions": {
+    "Region": [
+      {
+        "name": "South",
+        "delta": -15650.0,
+        "pct_of_total_change": 50.01597954618089
+      },
+      {
+        "name": "East",
+        "delta": -13850.0,
+        "pct_of_total_change": 44.263342921061046
+      },
+      {
+        "name": "North",
+        "delta": -8040.0,
+        "pct_of_total_change": 25.69511025886865
+      },
+      {
+        "name": "West",
+        "delta": 6250.0,
+        "pct_of_total_change": -19.974432726110578
+      }
+    ],
+    "Category": [
+      {
+        "name": "Electronics",
+        "delta": -40400.0,
+        "pct_of_total_change": 129.11473314157877
+      },
+      {
+        "name": "Audio",
+        "delta": 1200.0,
+        "pct_of_total_change": -3.8350910834132312
+      },
+      {
+        "name": "Accessories",
+        "delta": 2210.0,
+        "pct_of_total_change": -7.062959411952701
+      },
+      {
+        "name": "Wearables",
+        "delta": 5700.0,
+        "pct_of_total_change": -18.21668264621285
+      }
+    ],
+    "Product_Name": [
+      {
+        "name": "Smartphone Alpha",
+        "delta": -32900.0,
+        "pct_of_total_change": 105.1454138702461
+      },
+      {
+        "name": "Laptop Pro X",
+        "delta": -24000.0,
+        "pct_of_total_change": 76.70182166826463
+      },
+      {
+        "name": "Wireless Headphones",
+        "delta": -1200.0,
+        "pct_of_total_change": 3.8350910834132312
+      },
+      {
+        "name": "4K Monitor",
+        "delta": -400.0,
+        "pct_of_total_change": 1.278363694471077
+      },
+      {
+        "name": "Gaming Mouse",
+        "delta": -400.0,
+        "pct_of_total_change": 1.278363694471077
+      },
+      {
+        "name": "Tablet Pro",
+        "delta": 0.0,
+        "pct_of_total_change": -0.0
+      },
+      {
+        "name": "Fast Charger",
+        "delta": 930.0,
+        "pct_of_total_change": -2.972195589645254
+      },
+      {
+        "name": "Mechanical Keyboard",
+        "delta": 1680.0,
+        "pct_of_total_change": -5.369127516778524
+      },
+      {
+        "name": "Bluetooth Speaker",
+        "delta": 2400.0,
+        "pct_of_total_change": -7.6701821668264625
+      },
+      {
+        "name": "SmartWatch V2",
+        "delta": 5700.0,
+        "pct_of_total_change": -18.21668264621285
+      },
+      {
+        "name": "Laptop Air",
+        "delta": 7000.0,
+        "pct_of_total_change": -22.371364653243848
+      },
+      {
+        "name": "Smartphone Z",
+        "delta": 9900.0,
+        "pct_of_total_change": -31.639501438159158
+      }
+    ],
+    "Traffic_Source": [
+      {
+        "name": "Email",
+        "delta": -33520.0,
+        "pct_of_total_change": 107.12687759667625
+      },
+      {
+        "name": "Direct",
+        "delta": -30340.0,
+        "pct_of_total_change": 96.96388622563119
+      },
+      {
+        "name": "Facebook Ads",
+        "delta": -9070.0,
+        "pct_of_total_change": 28.986896772131672
+      },
+      {
+        "name": "Google Ads",
+        "delta": 2540.0,
+        "pct_of_total_change": -8.117609459891339
+      },
+      {
+        "name": "Organic",
+        "delta": 10010.0,
+        "pct_of_total_change": -31.991051454138702
+      },
+      {
+        "name": "Referral",
+        "delta": 11500.0,
+        "pct_of_total_change": -36.752956216043465
+      },
+      {
+        "name": "Unknown",
+        "delta": 17590.0,
+        "pct_of_total_change": -56.21604346436562
+      }
+    ],
+    "Supplier": [
+      {
+        "name": "Supplier_D",
+        "delta": -32420.0,
+        "pct_of_total_change": 103.6113774368808
+      },
+      {
+        "name": "Supplier_B",
+        "delta": -13650.0,
+        "pct_of_total_change": 43.624161073825505
+      },
+      {
+        "name": "Supplier_C",
+        "delta": -6810.0,
+        "pct_of_total_change": 21.764141898370088
+      },
+      {
+        "name": "Supplier_X",
+        "delta": -140.0,
+        "pct_of_total_change": 0.44742729306487694
+      },
+      {
+        "name": "Supplier_A",
+        "delta": 21730.0,
+        "pct_of_total_change": -69.44710770214127
+      }
+    ]
+  },
+  "simpsons_paradox": {
+    "Region": {
+      "aggregate_direction": "giảm",
+      "groups_against_trend": [
+        "West"
+      ],
+      "consistent": false,
+      "note": "1/4 nhóm đi ngược hướng tổng: West"
+    },
+    "Category": {
+      "aggregate_direction": "giảm",
+      "groups_against_trend": [
+        "Audio",
+        "Accessories",
+        "Wearables"
+      ],
+      "consistent": false,
+      "note": "3/4 nhóm đi ngược hướng tổng: Audio, Accessories, Wearables"
+    },
+    "Product_Name": {
+      "aggregate_direction": "giảm",
+      "groups_against_trend": [
+        "Fast Charger",
+        "Mechanical Keyboard",
+        "Bluetooth Speaker",
+        "SmartWatch V2",
+        "Laptop Air",
+        "Smartphone Z"
+      ],
+      "consistent": false,
+      "note": "6/12 nhóm đi ngược hướng tổng: Fast Charger, Mechanical Keyboard, Bluetooth Speaker, SmartWatch V2, Laptop Air, Smartphone Z"
+    },
+    "Traffic_Source": {
+      "aggregate_direction": "giảm",
+      "groups_against_trend": [
+        "Google Ads",
+        "Organic",
+        "Referral",
+        "Unknown"
+      ],
+      "consistent": false,
+      "note": "4/7 nhóm đi ngược hướng tổng: Google Ads, Organic, Referral, Unknown"
+    },
+    "Supplier": {
+      "aggregate_direction": "giảm",
+      "groups_against_trend": [
+        "Supplier_A"
+      ],
+      "consistent": false,
+      "note": "1/5 nhóm đi ngược hướng tổng: Supplier_A"
+    }
+  },
+  "decomposition": {
+    "total_change": -31290.0,
+    "volume_effect": 3928.1411359724616,
+    "price_effect": -35218.1411359725,
+    "volume_share_pct": 10.034519009197586,
+    "orders_prev": 1162,
+    "orders_curr": 1168,
+    "aov_prev": 654.6901893287436,
+    "aov_curr": 624.5376712328767,
+    "driver": "giá trị đơn"
+  },
+  "concentration": {
+    "Region": {
+      "top1_name": "East",
+      "top1_share_pct": 25.54162848540385,
+      "top2_share_pct": 50.687808177335604,
+      "risk": "thấp"
+    },
+    "Category": {
+      "top1_name": "Electronics",
+      "top1_share_pct": 87.1241872845486,
+      "top2_share_pct": 92.10084216956845,
+      "risk": "cao"
+    },
+    "Product_Name": {
+      "top1_name": "Laptop Pro X",
+      "top1_share_pct": 26.017803377405418,
+      "top2_share_pct": 44.34480953004319,
+      "risk": "thấp"
+    },
+    "Traffic_Source": {
+      "top1_name": "Email",
+      "top1_share_pct": 17.61247109132958,
+      "top2_share_pct": 34.479862111096566,
+      "risk": "thấp"
+    },
+    "Supplier": {
+      "top1_name": "Supplier_A",
+      "top1_share_pct": 20.83224244010996,
+      "top2_share_pct": 41.04540297595672,
+      "risk": "thấp"
+    }
+  }
+}

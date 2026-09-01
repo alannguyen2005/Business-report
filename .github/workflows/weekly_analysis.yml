@@ -1,0 +1,109 @@
+name: Weekly Business Analysis
+
+# Chạy toàn bộ phân tích trên runner Ubuntu — nơi statsmodels và prophet
+# cài được bằng wheel có sẵn. Kết quả commit thẳng vào repo để workflow
+# gửi mail (chạy sau đó 1 tiếng) đọc được.
+
+on:
+  schedule:
+    # 01:00 UTC = 08:00 giờ Việt Nam, thứ 2 hàng tuần
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Phân tích lại dù data không đổi'
+        type: boolean
+        default: false
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write          # cần để commit report vào repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements-analysis.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-analysis.txt
+
+      # Ghi lại thư viện nào thực sự có mặt — để khi forecast lùi về model
+      # đơn giản thì log nói được ngay lý do.
+      - name: Kiểm tra thư viện dự báo
+        run: |
+          python - <<'EOF'
+          for name in ("statsmodels", "prophet"):
+              try:
+                  mod = __import__(name)
+                  print(f"OK   {name} {getattr(mod, '__version__', '?')}")
+              except ImportError as exc:
+                  print(f"MISS {name}: {exc}")
+          EOF
+
+      # exit 0 = chạy tiếp, 10 = data không đổi (dừng êm), 1 = lỗi schema
+      - name: Cổng kiểm tra data
+        id: gate
+        run: |
+          FORCE=""
+          if [ "${{ inputs.force }}" = "true" ]; then FORCE="--force"; fi
+          code=0
+          python check_data.py --json $FORCE || code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "::error::Data hoặc schema không hợp lệ — sửa config.yaml."
+            exit 1
+          fi
+          if [ "$code" -eq 10 ]; then
+            echo "::notice::Data không đổi — bỏ qua phân tích tuần này."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Tính metrics
+        if: steps.gate.outputs.run == 'true'
+        run: python compute_metrics.py
+
+      - name: Lắp ráp report và insights
+        if: steps.gate.outputs.run == 'true'
+        run: python assemble_report.py
+
+      - name: Render HTML
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          STEM=$(python -c "import yaml;print(yaml.safe_load(open('config.yaml',encoding='utf-8'))['data']['stem'])")
+          OUT="data/reports/business_report_$(date +%Y-%m-%d).html"
+          python ai_analyst/scripts/render_html.py --stem "$STEM" --pipeline-dir "data/pipeline/$STEM" --output "$OUT"
+          test -s "$OUT" || { echo "::error::Report rỗng"; exit 1; }
+
+      - name: Đóng sổ
+        if: steps.gate.outputs.run == 'true'
+        run: python check_data.py --record
+
+      - name: Commit kết quả
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ logs/
+          git diff --staged --quiet || git commit -m "analysis: business review $(date +'%Y-%m-%d')"
+          git push
+
+      # Giữ report lại kể cả khi push hỏng — tải về từ tab Actions
+      - name: Upload report làm artifact
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: business-report
+          path: |
+            data/reports/*.html
+            data/pipeline/**/insights.json
+          retention-days: 30

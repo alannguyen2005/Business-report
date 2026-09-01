@@ -1,0 +1,39 @@
+name: Validate Data
+
+# Chạy mỗi khi data hoặc config thay đổi — bắt lỗi schema ngay lúc đổi data,
+# thay vì để Routine phát hiện sau đó vài ngày.
+
+on:
+  push:
+    paths:
+      - 'config.yaml'
+      - 'ai_analyst/data/raw/**'
+      - 'data/raw/**'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # exit 0 = sẵn sàng phân tích, 10 = data không đổi (bỏ qua), 1 = lỗi schema
+      - name: Kiểm tra data và schema
+        run: |
+          code=0
+          python check_data.py --json || code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "::error::Data hoặc schema không hợp lệ — sửa config.yaml cho khớp file data."
+            exit 1
+          fi
+          echo "Kiểm tra xong (exit $code) — schema hợp lệ."

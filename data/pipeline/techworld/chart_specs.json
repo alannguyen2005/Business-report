@@ -1,0 +1,404 @@
+{
+  "charts": [
+    {
+      "chart_id": "monthly_revenue_trend",
+      "chart_type": "highlight_line",
+      "title": "Doanh thu theo tháng — dao động mùa vụ, không có xu hướng rõ",
+      "data": {
+        "labels": [
+          "2022-01",
+          "2022-02",
+          "2022-03",
+          "2022-04",
+          "2022-05",
+          "2022-06",
+          "2022-07",
+          "2022-08",
+          "2022-09",
+          "2022-10",
+          "2022-11",
+          "2022-12",
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06"
+        ],
+        "series": [
+          {
+            "name": "Doanh thu",
+            "values": [
+              73060,
+              67540,
+              57810,
+              52500,
+              49390,
+              69930,
+              57910,
+              68610,
+              60840,
+              82110,
+              53400,
+              67650,
+              68450,
+              53640,
+              56360,
+              56480,
+              61390,
+              50330,
+              56340,
+              56480,
+              67310,
+              63260,
+              68810,
+              70610,
+              60260,
+              63750,
+              52950,
+              52580,
+              54520,
+              59090
+            ],
+            "highlight_indices": [
+              9,
+              21
+            ],
+            "trough_indices": [
+              3,
+              15,
+              27
+            ],
+            "color_default": "#94A3B8",
+            "color_highlight": "#2554E7",
+            "color_trough": "#EF4444"
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "category_yoy",
+      "chart_type": "horizontal_bar",
+      "title": "Tăng trưởng 2023 vs 2022 theo nhóm hàng",
+      "data": {
+        "labels": [
+          "Electronics (87% DT)",
+          "Audio (5% DT)",
+          "Accessories (3% DT)",
+          "Wearables (5% DT)"
+        ],
+        "series": [
+          {
+            "name": "YoY %",
+            "values": [
+              -6.0,
+              3.2,
+              9.8,
+              19.4
+            ],
+            "colors": [
+              "#EF4444",
+              "#10B981",
+              "#10B981",
+              "#10B981"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "yoy_waterfall",
+      "chart_type": "waterfall",
+      "title": "Từ 2022 đến 2023: nhóm nào kéo doanh thu",
+      "data": {
+        "labels": [
+          "2022",
+          "Electronics",
+          "Audio",
+          "Accessories",
+          "Wearables",
+          "2023"
+        ],
+        "series": [
+          {
+            "name": "Đóng góp",
+            "values": [
+              760750.0,
+              -40400.0,
+              1200.0,
+              2210.0,
+              5700.0,
+              729460.0
+            ],
+            "types": [
+              "base",
+              "delta",
+              "delta",
+              "delta",
+              "delta",
+              "total"
+            ],
+            "colors": [
+              "#94A3B8",
+              "#EF4444",
+              "#10B981",
+              "#10B981",
+              "#10B981",
+              "#2554E7"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "revenue_forecast",
+      "chart_type": "forecast_line",
+      "title": "Dự báo 6 kỳ tới — model trend_seasonal (MAPE 5.73%)",
+      "data": {
+        "labels": [
+          "2022-01",
+          "2022-02",
+          "2022-03",
+          "2022-04",
+          "2022-05",
+          "2022-06",
+          "2022-07",
+          "2022-08",
+          "2022-09",
+          "2022-10",
+          "2022-11",
+          "2022-12",
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12"
+        ],
+        "forecast_start_idx": 30,
+        "series": [
+          {
+            "name": "Actual",
+            "color": "#2554E7",
+            "values": [
+              73060.0,
+              67540.0,
+              57810.0,
+              52500.0,
+              49390.0,
+              69930.0,
+              57910.0,
+              68610.0,
+              60840.0,
+              82110.0,
+              53400.0,
+              67650.0,
+              68450.0,
+              53640.0,
+              56360.0,
+              56480.0,
+              61390.0,
+              50330.0,
+              56340.0,
+              56480.0,
+              67310.0,
+              63260.0,
+              68810.0,
+              70610.0,
+              60260.0,
+              63750.0,
+              52950.0,
+              52580.0,
+              54520.0,
+              59090.0,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          {
+            "name": "Forecast",
+            "color": "#10B981",
+            "values": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              59090.0,
+              53699.18,
+              58700.95,
+              60280.43,
+              68157.32,
+              57543.95,
+              64973.22
+            ]
+          },
+          {
+            "name": "CI Low",
+            "values": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              49754.51,
+              54388.86,
+              55852.31,
+              63150.58,
+              53316.85,
+              60200.38
+            ]
+          },
+          {
+            "name": "CI High",
+            "values": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              57643.84,
+              63013.04,
+              64708.54,
+              73164.06,
+              61771.05,
+              69746.06
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "model_comparison",
+      "chart_type": "model_comparison_bar",
+      "title": "Sai số backtest (MAPE, thấp hơn là tốt hơn)",
+      "data": {
+        "labels": [
+          "seasonal_naive",
+          "trend_seasonal"
+        ],
+        "series": [
+          {
+            "name": "MAPE %",
+            "values": [
+              11.79,
+              5.73
+            ],
+            "colors": [
+              "#94A3B8",
+              "#10B981"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

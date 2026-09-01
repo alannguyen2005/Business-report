@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-09-01",
+  "data_period": {
+    "start": "2022-01-01",
+    "end": "2024-06-29"
+  },
+  "headline": "Doanh thu 2023 giảm 4.1% dù số đơn vẫn tăng +0.5% — vấn đề nằm ở giá trị mỗi đơn (-4.6%), không phải ở nhu cầu.",
+  "confidence": {
+    "grade": "C",
+    "note": "Net_Profit: 54 dòng dùng dấu phẩy làm thập phân; Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân"
+  },
+  "kpis": [
+    {
+      "label": "Doanh thu",
+      "value": "$1.83M",
+      "delta": "-4.1% YoY",
+      "direction": "down"
+    },
+    {
+      "label": "Biên lợi nhuận",
+      "value": "33.1%",
+      "delta": "không đổi",
+      "direction": "flat"
+    },
+    {
+      "label": "Giá trị đơn (AOV)",
+      "value": "$632",
+      "delta": "-4.6% so với đầu kỳ",
+      "direction": "down"
+    },
+    {
+      "label": "Dự báo 6 kỳ",
+      "value": "$363K",
+      "delta": "MAPE 5.73%",
+      "direction": "flat"
+    }
+  ],
+  "findings": [
+    {
+      "title": "Sụt giảm đến từ giá trị đơn, không phải sản lượng — hiệu ứng giá -$35K so với sản lượng $4K",
+      "detail": "Số đơn tăng từ 1,162 lên 1,168 nhưng AOV rơi từ $655 xuống $625. Nhu cầu không yếu đi — mỗi đơn đang mang về ít tiền hơn.",
+      "evidence": "Phân tách biến động -$31K: hiệu ứng sản lượng $4K, hiệu ứng giá -$35K."
+    },
+    {
+      "title": "Xu hướng 30 kỳ: đi ngang — biến động không có ý nghĩa thống kê",
+      "detail": "Hồi quy tuyến tính cho hệ số góc -$176/kỳ, nhưng R²=0.039 và p=0.297 — chưa đủ bằng chứng thống kê để gọi đây là một xu hướng.",
+      "evidence": "Biến động giữa các kỳ chủ yếu là mùa vụ, không phải suy giảm cấu trúc."
+    },
+    {
+      "title": "3/4 nhóm hàng vẫn tăng — tổng bị Electronics (87% doanh thu) kéo xuống",
+      "detail": "Wearables tăng +19.4% và Accessories +9.8%, Audio +3.2%. Nhưng Electronics giảm -6.0% trên nền 87% doanh thu nên áp đảo toàn bộ.",
+      "evidence": "Đây là nghịch lý Simpson: nhìn tổng thấy giảm, nhìn từng nhóm thì đa số đang tăng. Các nhóm tăng cộng lại chỉ chiếm 13% doanh thu."
+    },
+    {
+      "title": "Electronics chiếm 87% doanh thu — rủi ro tập trung cao",
+      "detail": "Kết quả kinh doanh gần như là kết quả của riêng Electronics. Mọi biến động của nhóm này đi thẳng vào tổng doanh thu mà không có nhóm nào đủ lớn để bù.",
+      "evidence": "Hai hạng mục lớn nhất chiếm 92% doanh thu."
+    },
+    {
+      "title": "Mùa vụ dao động 29 điểm — đỉnh Tháng 10, đáy Tháng 4",
+      "detail": "Tháng 10 đạt chỉ số 117 (cao hơn trung bình 17%), Tháng 4 chỉ 88. Kế hoạch tồn kho và ngân sách quảng cáo nên bám nhịp này.",
+      "evidence": "Chỉ số tính trên các năm trọn vẹn: [2022, 2023]."
+    }
+  ],
+  "forecast": {
+    "horizon": "6 kỳ",
+    "model": "trend_seasonal (MAPE 5.73%)",
+    "summary": "6 kỳ tới dự báo tổng $363K bằng model trend_seasonal (MAPE 5.73% so với baseline 11.79%).",
+    "points": [
+      {
+        "period": "2024-07",
+        "value": 53699,
+        "lo": 49755,
+        "hi": 57644
+      },
+      {
+        "period": "2024-08",
+        "value": 58701,
+        "lo": 54389,
+        "hi": 63013
+      },
+      {
+        "period": "2024-09",
+        "value": 60280,
+        "lo": 55852,
+        "hi": 64709
+      },
+      {
+        "period": "2024-10",
+        "value": 68157,
+        "lo": 63151,
+        "hi": 73164
+      },
+      {
+        "period": "2024-11",
+        "value": 57544,
+        "lo": 53317,
+        "hi": 61771
+      },
+      {
+        "period": "2024-12",
+        "value": 64973,
+        "lo": 60200,
+        "hi": 69746
+      }
+    ]
+  },
+  "strategy": [
+    {
+      "action": "Dựng lại giá trị đơn: bán kèm và nâng cấp cấu hình tại bước thanh toán",
+      "rationale": "AOV rơi $30/đơn trong khi số đơn vẫn tăng — lưu lượng khách không phải vấn đề, giỏ hàng mới là vấn đề.",
+      "impact": "Lấy lại được AOV cũ tương đương $35K/năm",
+      "effort": "Trung bình",
+      "owner_hint": "Thương mại điện tử",
+      "priority": 1
+    },
+    {
+      "action": "Dồn ngân sách và diện tích trưng bày cho Wearables",
+      "rationale": "Wearables tăng +19.4% nhưng mới chiếm 5% doanh thu — nhóm tăng nhanh nhất lại đang được đầu tư ít nhất.",
+      "impact": "Nhân đôi tốc độ hiện tại ≈ $11K/năm",
+      "effort": "Thấp",
+      "owner_hint": "Thu mua & Marketing",
+      "priority": 2
+    },
+    {
+      "action": "Đặt mục tiêu giảm tỷ trọng Electronics xuống dưới 72% trong 4 quý",
+      "rationale": "87% doanh thu nằm ở một hạng mục duy nhất. Đây là rủi ro cấu trúc, không phải vấn đề của một quý.",
+      "impact": "Giảm biên độ dao động doanh thu, chưa tăng doanh thu ngay",
+      "effort": "Cao",
+      "owner_hint": "Ban điều hành",
+      "priority": 3
+    },
+    {
+      "action": "Nhân bản cách làm của vùng West sang các vùng còn lại",
+      "rationale": "West là vùng duy nhất tăng trưởng (+3.5%) trong khi toàn hệ thống giảm — có gì đó ở đây đang hiệu quả.",
+      "impact": "Chưa định lượng được — cần khảo sát vận hành trước",
+      "effort": "Thấp",
+      "owner_hint": "Vận hành vùng",
+      "priority": 4
+    },
+    {
+      "action": "Chốt tồn kho và ngân sách quảng cáo cho Tháng 10 trước ít nhất 6 tuần",
+      "rationale": "Tháng 10 luôn là đỉnh (chỉ số 117); dự báo kỳ này $68K.",
+      "impact": "Tránh hụt hàng ở kỳ cao điểm ≈ $68K",
+      "effort": "Thấp",
+      "owner_hint": "Chuỗi cung ứng",
+      "priority": 5
+    }
+  ],
+  "risks": [
+    "Chất lượng data: Net_Profit: 54 dòng dùng dấu phẩy làm thập phân",
+    "Chất lượng data: Shipping_Cost: 1440 dòng dùng dấu phẩy làm thập phân",
+    "Chất lượng data: Order_ID: 269 dòng thuộc nhóm ID trùng (2864 ID duy nhất / 3000 dòng)",
+    "Chất lượng data: năm 2024 chỉ có 569 dòng (trung vị các năm: 1162) — kỳ chưa trọn vẹn",
+    "2024 chỉ có 6 kỳ — không so cả năm được — kết quả kỳ mới nhất chưa so được cả năm (cùng kỳ: -1.0%).",
+    "Model sarima, holt_winters không chạy được (statsmodels chưa được cài) — dự báo dùng trend_seasonal thay thế.",
+    "Model prophet không chạy được (prophet chưa được cài) — dự báo dùng trend_seasonal thay thế.",
+    "Xu hướng không có ý nghĩa thống kê — đừng ngoại suy dài hạn từ chuỗi số này."
+  ],
+  "report_file": "data/reports/business_report_2026-09-01.html"
+}
